@@ -67,7 +67,7 @@ function style(feature) {
 		color : 'white',
 		dashArray : '3',
 		fillOpacity : 0.7,
-		fillColor : getBlueColor(feature.properties.Population, Status.pop.eint)
+		fillColor : getBlueColor(feature.properties.Population, Status.POP.eint)
 	};
 }
 
@@ -138,7 +138,7 @@ var legend = L.control({
 legend.onAdd = function (map) {
 
 	var div = L.DomUtil.create('div', 'info legend'),
-	grades = Status.pop.eint,
+	grades = Status.POP.eint,
 	labels = [],
 	from,
 	to;
@@ -148,7 +148,7 @@ legend.onAdd = function (map) {
 		to = grades[i + 1];
 
 		labels.push(
-			'<i style="background:' + getBlueColor(from + 1, Status.pop.eint) + '"></i> ' +
+			'<i style="background:' + getBlueColor(from + 1, Status.POP.eint) + '"></i> ' +
 			Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
 	}
 

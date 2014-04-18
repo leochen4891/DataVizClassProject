@@ -11,7 +11,7 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getBlueColor(feature.properties.Population, Status.pop.eint)
+							fillColor : getBlueColor(feature.properties.Population, Status.POP.eint)
 						};
 					} else {
 						return {
@@ -20,16 +20,16 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getBlueColor(feature.properties.Population, Status.pop.qint)
+							fillColor : getBlueColor(feature.properties.Population, Status.POP.qint)
 						};
 					}
 				},
 				onEachFeature : onEachFeature
 			}).addTo(map);
 		if ($('#schemeM').val() == 'equalInterval') {
-			updateLegend(Status.pop.eint, 'blue');
+			updateLegend(Status.POP.eint, 'blue');
 		} else {
-			updateLegend(Status.pop.qint, 'blue');
+			updateLegend(Status.POP.qint, 'blue');
 		}
 		info.update = function (props) {
 			var n = 10;
@@ -49,7 +49,7 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getGreenColor(feature.properties.Income, Status.income.eint)
+							fillColor : getGreenColor(feature.properties.Income, Status.INC.eint)
 						};
 					} else {
 						return {
@@ -58,16 +58,16 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getGreenColor(feature.properties.Income, Status.income.qint)
+							fillColor : getGreenColor(feature.properties.Income, Status.INC.qint)
 						};
 					}
 				},
 				onEachFeature : onEachFeature
 			}).addTo(map);
 		if ($('#schemeM').val() == 'equalInterval') {
-			updateLegend(Status.income.eint, 'green');
+			updateLegend(Status.INC.eint, 'green');
 		} else {
-			updateLegend(Status.income.qint, 'green');
+			updateLegend(Status.INC.qint, 'green');
 		}
 		info.update = function (props) {
 			var n = 10;
@@ -104,7 +104,7 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getRedColor(monthTotal, Status.crimeN.eint)
+							fillColor : getRedColor(monthTotal, Status.CRM.eint)
 						};
 					} else {
 						return {
@@ -113,7 +113,7 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getRedColor(monthTotal, Status.crimeN.qint)
+							fillColor : getRedColor(monthTotal, Status.CRM.qint)
 						};
 					}
 				},
@@ -143,9 +143,9 @@ $('#dataM').change(function () {
 				}
 			}).addTo(map);
 		if ($('#schemeM').val() == 'equalInterval') {
-			updateLegend(Status.crimeN.eint, 'red');
+			updateLegend(Status.CRM.eint, 'red');
 		} else {
-			updateLegend(Status.crimeN.qint, 'red');
+			updateLegend(Status.CRM.qint, 'red');
 		}
 		info.update = function (props) {
 			var left = $("#slider").slider("values", 0);
@@ -193,7 +193,7 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getYellowColor(monthTotal, Status.rateN.eint)
+							fillColor : getYellowColor(monthTotal, Status.REV.eint)
 						};
 					} else {
 						return {
@@ -202,16 +202,16 @@ $('#dataM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getYellowColor(monthTotal, Status.rateN.qint)
+							fillColor : getYellowColor(monthTotal, Status.REV.qint)
 						};
 					}
 				},
 				onEachFeature : onEachFeature
 			}).addTo(map);
 		if ($('#schemeM').val() == 'equalInterval') {
-			updateLegend(Status.rateN.eint, 'yellow');
+			updateLegend(Status.REV.eint, 'yellow');
 		} else {
-			updateLegend(Status.rateN.qint, 'yellow');
+			updateLegend(Status.REV.qint, 'yellow');
 		}
 		info.update = function (props) {
 			var left = $("#slider").slider("values", 0);
@@ -238,8 +238,10 @@ $('#dataM').change(function () {
 
 /****** Color Menu Event **********/
 $('#schemeM').change(function () {
-	setChernoffVisible(false);
-	setChernoffVisible(true);
+	if( $('#checkboxShowFaces').prop("checked") ){
+		setChernoffVisible(false);
+		setChernoffVisible(true);
+	}
 	if ($(this).val() == 'equalInterval') {
 		if ($('#dataM').val() === 'pop') {
 			geojson.clearLayers();
@@ -247,7 +249,7 @@ $('#schemeM').change(function () {
 					style : style,
 					onEachFeature : onEachFeature
 				}).addTo(map);
-			updateLegend(Status.pop.eint, 'blue');
+			updateLegend(Status.POP.eint, 'blue');
 			info.update = function (props) {
 				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
@@ -265,12 +267,12 @@ $('#schemeM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getGreenColor(feature.properties.Income, Status.income.eint)
+							fillColor : getGreenColor(feature.properties.Income, Status.INC.eint)
 						};
 					},
 					onEachFeature : onEachFeature
 				}).addTo(map);
-			updateLegend(Status.income.eint, 'green');
+			updateLegend(Status.INC.eint, 'green');
 			info.update = function (props) {
 				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
@@ -305,7 +307,7 @@ $('#schemeM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getRedColor(monthTotal, Status.crimeN.eint)
+							fillColor : getRedColor(monthTotal, Status.CRM.eint)
 						};
 					},
 					onEachFeature : function (feature, layer) {
@@ -333,7 +335,7 @@ $('#schemeM').change(function () {
 						});
 					}
 				}).addTo(map);
-			updateLegend(Status.crimeN.eint, 'red');
+			updateLegend(Status.CRM.eint, 'red');
 			info.update = function (props) {
 				var left = $("#slider").slider("values", 0);
 				var right = $("#slider").slider("values", 1);
@@ -378,12 +380,12 @@ $('#schemeM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getYellowColor(monthTotal, Status.rateN.eint)
+							fillColor : getYellowColor(monthTotal, Status.REV.eint)
 						};
 					},
 					onEachFeature : onEachFeature
 				}).addTo(map);
-			updateLegend(Status.rateN.eint, 'yellow');
+			updateLegend(Status.REV.eint, 'yellow');
 			info.update = function (props) {
 				var left = $("#slider").slider("values", 0);
 				var right = $("#slider").slider("values", 1);
@@ -416,12 +418,12 @@ $('#schemeM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getBlueColor(feature.properties.Population, Status.pop.qint)
+							fillColor : getBlueColor(feature.properties.Population, Status.POP.qint)
 						};
 					},
 					onEachFeature : onEachFeature
 				}).addTo(map);
-			updateLegend(Status.pop.qint, 'blue');
+			updateLegend(Status.POP.qint, 'blue');
 			info.update = function (props) {
 				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
@@ -439,12 +441,12 @@ $('#schemeM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getGreenColor(feature.properties.Income, Status.income.qint)
+							fillColor : getGreenColor(feature.properties.Income, Status.INC.qint)
 						};
 					},
 					onEachFeature : onEachFeature
 				}).addTo(map);
-			updateLegend(Status.income.qint, 'green');
+			updateLegend(Status.INC.qint, 'green');
 			info.update = function (props) {
 				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
@@ -479,7 +481,7 @@ $('#schemeM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getRedColor(monthTotal, Status.crimeN.qint)
+							fillColor : getRedColor(monthTotal, Status.CRM.qint)
 						};
 					},
 					onEachFeature : function (feature, layer) {
@@ -507,7 +509,7 @@ $('#schemeM').change(function () {
 						});
 					}
 				}).addTo(map);
-			updateLegend(Status.crimeN.qint, 'red');
+			updateLegend(Status.CRM.qint, 'red');
 			info.update = function (props) {
 				var left = $("#slider").slider("values", 0);
 				var right = $("#slider").slider("values", 1);
@@ -552,12 +554,12 @@ $('#schemeM').change(function () {
 							color : 'white',
 							dashArray : '3',
 							fillOpacity : 0.7,
-							fillColor : getYellowColor(monthTotal, Status.rateN.qint)
+							fillColor : getYellowColor(monthTotal, Status.REV.qint)
 						};
 					},
 					onEachFeature : onEachFeature
 				}).addTo(map);
-			updateLegend(Status.rateN.qint, 'yellow');
+			updateLegend(Status.REV.qint, 'yellow');
 			info.update = function (props) {
 				var left = $("#slider").slider("values", 0);
 				var right = $("#slider").slider("values", 1);

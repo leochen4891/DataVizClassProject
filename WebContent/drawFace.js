@@ -62,7 +62,7 @@ function addChernoff() {
 
 function getScale(geoid) {
 	var pop = getPop(geoid);
-	var grade = 3*value2grade(pop, Status.pop.eint) / Status.pop.eint.length;
+	var grade = 3*value2grade(pop, Status.POP.eint) / Status.POP.eint.length;
 	return grade;
 }
 
@@ -72,10 +72,10 @@ function getSkin(geoid) {
 	var currentGrades = [];
 	$(function(){
 		if ( $('#schemeM').val() == 'equalInterval'){
-			currentGrades = Status.income.eint;
+			currentGrades = Status.INC.eint;
 		}
 		else{
-			currentGrades = Status.income.qint;
+			currentGrades = Status.INC.qint;
 		}
 	});
 	return getGradeIndex(currentIncome, currentGrades);
@@ -87,10 +87,10 @@ function getEye(geoid, begin, end) {
 	var currentGrades = [];
 	$(function(){
 		if ( $('#schemeM').val() == 'equalInterval'){
-			currentGrades = Status.crimeN.eint;
+			currentGrades = Status.CRM.eint;
 		}
 		else{
-			currentGrades = Status.crimeN.qint;
+			currentGrades = Status.CRM.qint;
 		}
 	});
 	return getGradeIndex(nSum , currentGrades);
@@ -102,10 +102,10 @@ function getEyebrow(geoid, begin, end) {
 	var currentGrades = [];
 	$(function(){
 		if ( $('#schemeM').val() == 'equalInterval'){
-			currentGrades = Status.crimeN.eint;
+			currentGrades = Status.VCR.eint;
 		}
 		else{
-			currentGrades = Status.crimeN.qint;
+			currentGrades = Status.VCR.qint;
 		}
 	});
 	return getGradeIndex(currentVCrime, currentGrades);
@@ -120,10 +120,10 @@ function getSmile(geoid, begin, end) {
 	var currentGrades = [];
 	$(function(){
 		if ( $('#schemeM').val() == 'equalInterval'){
-			currentGrades = Status.rateP.eint;
+			currentGrades = Status.RAT.eint;
 		}
 		else{
-			currentGrades = Status.rateP.qint;
+			currentGrades = Status.RAT.qint;
 		}
 	});
 	return getGradeIndex(ave, currentGrades);
@@ -137,10 +137,10 @@ function getMouth(geoid, begin, end) {
 	var currentGrades = [];
 	$(function(){
 		if ( $('#schemeM').val() == 'equalInterval'){
-			currentGrades = Status.rateN.eint;
+			currentGrades = Status.REV.eint;
 		}
 		else{
-			currentGrades = Status.rateR.qint;
+			currentGrades = Status.STR.qint;
 		}
 	});
 	return getGradeIndex(sum, currentGrades);

@@ -33,49 +33,49 @@ var mapGrades = {
 	},
 };
 var Status = {
-	pop : {
+	POP : {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
 	},
-	income : {
+	INC : {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
 	},
-	crimeN : {
+	CRM : {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
 	},
-	vCrimeN : {
+	VCR : {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
 	},
-	rateN : {
+	REV : {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
 	},
-	rateR : {
+	STR : {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
 	},
-	rateP: {
+	RAT: {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
@@ -163,8 +163,8 @@ function getAveList(start, end){
 
 function getAveGrades(aveList){
 	var list = aveList.sort(function(a, b){ return a-b;});
-	Status.rateP.eint = equalInt(list);
-	Status.rateP.qint = quantInt(list);
+	Status.RAT.eint = equalInt(list);
+	Status.RAT.qint = quantInt(list);
 }
 function totList(flag) {
 	var c = tractData.features;
@@ -214,66 +214,66 @@ function getGrade(start, end) {
 			return a - b;
 		});
 
-	Status.crimeN.total = calcTotal('C_M', start, end);
-	Status.crimeN.ave = Status.crimeN.total / sCount('C_M', start, end);
-	Status.crimeN.med = median(slist);
-	Status.crimeN.eint = equalInt(slist);
-	Status.crimeN.qint = quantInt(slist);
+	Status.CRM.total = calcTotal('C_M', start, end);
+	Status.CRM.ave = Status.CRM.total / sCount('C_M', start, end);
+	Status.CRM.med = median(slist);
+	Status.CRM.eint = equalInt(slist);
+	Status.CRM.qint = quantInt(slist);
 
 	list = sumList('VC_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.vCrimeN.total = calcTotal('VC_M', start, end);
-	Status.vCrimeN.ave = Status.vCrimeN.total / sCount('VC_M', start, end);
-	Status.vCrimeN.med = median(slist);
-	Status.vCrimeN.eint = equalInt(slist);
-	Status.vCrimeN.qint = quantInt(slist);
+	Status.VCR.total = calcTotal('VC_M', start, end);
+	Status.VCR.ave = Status.VCR.total / sCount('VC_M', start, end);
+	Status.VCR.med = median(slist);
+	Status.VCR.eint = equalInt(slist);
+	Status.VCR.qint = quantInt(slist);
 
 	list = sumList('R_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.rateN.total = calcTotal('R_M', start, end);
-	Status.rateN.ave = Status.rateN.total / sCount('R_M', start, end);
-	Status.rateN.med = median(slist);
-	Status.rateN.eint = equalInt(slist);
-	Status.rateN.qint = quantInt(slist);
+	Status.REV.total = calcTotal('R_M', start, end);
+	Status.REV.ave = Status.REV.total / sCount('R_M', start, end);
+	Status.REV.med = median(slist);
+	Status.REV.eint = equalInt(slist);
+	Status.REV.qint = quantInt(slist);
 
 	list = sumList('S_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.rateR.total = calcTotal('S_M', start, end);
-	Status.rateR.ave = Status.rateR.total / sCount('S_M', start, end);
-	Status.rateR.med = median(slist);
-	Status.rateR.eint = equalInt(slist);
-	Status.rateR.qint = quantInt(slist);
+	Status.STR.total = calcTotal('S_M', start, end);
+	Status.STR.ave = Status.STR.total / sCount('S_M', start, end);
+	Status.STR.med = median(slist);
+	Status.STR.eint = equalInt(slist);
+	Status.STR.qint = quantInt(slist);
 
 	list = totList('Population');
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.pop.total = total('Population');
-	Status.pop.ave = Status.pop.total / len;
-	Status.pop.med = median(slist);
-	Status.pop.eint = equalInt(slist);
-	Status.pop.qint = quantInt(slist);
+	Status.POP.total = total('Population');
+	Status.POP.ave = Status.POP.total / len;
+	Status.POP.med = median(slist);
+	Status.POP.eint = equalInt(slist);
+	Status.POP.qint = quantInt(slist);
 
 	list = totList('Income');
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.income.total = total('Income');
-	Status.income.ave = Status.income.total / len;
-	Status.income.med = median(slist);
-	Status.income.eint = equalInt(slist);
-	Status.income.qint = quantInt(slist);
+	Status.INC.total = total('Income');
+	Status.INC.ave = Status.INC.total / len;
+	Status.INC.med = median(slist);
+	Status.INC.eint = equalInt(slist);
+	Status.INC.qint = quantInt(slist);
 	
 	getAveGrades(getAveList(start, end));
 }
@@ -286,62 +286,62 @@ function updateGrade(start, end) {
 			return a - b;
 		});
 
-	Status.crimeN.total = calcTotal('C_M', start, end);
-	Status.crimeN.ave = Status.crimeN.total / sCount('C_M', start, end);
-	Status.crimeN.med = median(slist);
-	Status.crimeN.eint = equalInt(slist);
-	Status.crimeN.qint = quantInt(slist);
+	Status.CRM.total = calcTotal('C_M', start, end);
+	Status.CRM.ave = Status.CRM.total / sCount('C_M', start, end);
+	Status.CRM.med = median(slist);
+	Status.CRM.eint = equalInt(slist);
+	Status.CRM.qint = quantInt(slist);
 
 	list = sumList('VC_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.vCrimeN.total = calcTotal('VC_M', start, end);
-	Status.vCrimeN.ave = Status.vCrimeN.total / sCount('VC_M', start, end);
-	Status.vCrimeN.med = median(slist);
-	Status.vCrimeN.eint = equalInt(slist);
-	Status.vCrimeN.qint = quantInt(slist);
+	Status.VCR.total = calcTotal('VC_M', start, end);
+	Status.VCR.ave = Status.VCR.total / sCount('VC_M', start, end);
+	Status.VCR.med = median(slist);
+	Status.VCR.eint = equalInt(slist);
+	Status.VCR.qint = quantInt(slist);
 
 	list = sumList('R_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.rateN.total = calcTotal('R_M', start, end);
-	Status.rateN.ave = Status.rateN.total / sCount('R_M', start, end);
-	Status.rateN.med = median(slist);
-	Status.rateN.eint = equalInt(slist);
-	Status.rateN.qint = quantInt(slist);
+	Status.REV.total = calcTotal('R_M', start, end);
+	Status.REV.ave = Status.REV.total / sCount('R_M', start, end);
+	Status.REV.med = median(slist);
+	Status.REV.eint = equalInt(slist);
+	Status.REV.qint = quantInt(slist);
 
 	list = sumList('S_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.rateR.total = calcTotal('S_M', start, end);
-	Status.rateR.ave = Status.rateR.total / sCount('S_M', start, end);
-	Status.rateR.med = median(slist);
-	Status.rateR.eint = equalInt(slist);
-	Status.rateR.qint = quantInt(slist);
+	Status.STR.total = calcTotal('S_M', start, end);
+	Status.STR.ave = Status.STR.total / sCount('S_M', start, end);
+	Status.STR.med = median(slist);
+	Status.STR.eint = equalInt(slist);
+	Status.STR.qint = quantInt(slist);
 	
 	getAveGrades(getAveList(start, end));
 }
 
 function updateParaLines() {
-    paraAvgLine.POP = Status.pop.ave;
-    paraAvgLine.INC = Status.income.ave;
-    paraAvgLine.CRM = Status.crimeN.ave;
-    paraAvgLine.VCR = Status.vCrimeN.ave;
-    paraAvgLine.REV = Status.rateN.ave;
-    paraAvgLine.STR = Status.rateR.ave;
+    paraAvgLine.POP = Status.POP.ave;
+    paraAvgLine.INC = Status.INC.ave;
+    paraAvgLine.CRM = Status.CRM.ave;
+    paraAvgLine.VCR = Status.VCR.ave;
+    paraAvgLine.REV = Status.REV.ave;
+    paraAvgLine.STR = Status.STR.ave;
     
-    paraMedLine.POP = Status.pop.ave;
-    paraMedLine.INC = Status.income.ave;
-    paraMedLine.CRM = Status.crimeN.ave;
-    paraMedLine.VCR = Status.vCrimeN.ave;
-    paraMedLine.REV = Status.rateN.ave;
-    paraMedLine.STR = Status.rateR.ave;
+    paraMedLine.POP = Status.POP.ave;
+    paraMedLine.INC = Status.INC.ave;
+    paraMedLine.CRM = Status.CRM.ave;
+    paraMedLine.VCR = Status.VCR.ave;
+    paraMedLine.REV = Status.REV.ave;
+    paraMedLine.STR = Status.STR.ave;
 
     if (null != geoid) {
         paraGeoidLine.POP = getPop(parseInt(geoid));
@@ -354,8 +354,8 @@ function updateParaLines() {
 }
 
 function setMapGrades(){
-	mapGrades.crimeGrades.eint = Status.crimeN.eint;
-	mapGrades.crimeGrades.qint = Status.crimeN.qint;
-	mapGrades.rateGrades.eint = Status.rateN.eint;
-	mapGrades.rateGrades.qint = Status.rateN.qint;
+	mapGrades.crimeGrades.eint = Status.CRM.eint;
+	mapGrades.crimeGrades.qint = Status.CRM.qint;
+	mapGrades.rateGrades.eint = Status.REV.eint;
+	mapGrades.rateGrades.qint = Status.REV.qint;
 }
