@@ -1,3 +1,4 @@
+
 #chart_container {
 	position: absolute;
 	width: 600px;
@@ -12,8 +13,10 @@
 
 #timeLegend {
 	position: absolute;
-	left: 0px;
+	left: 535px;
+	top: 0px;
 	right: 0px;
+	height: 15px;
 	background-color: transparent;
 	color: black;
 }
@@ -40,4 +43,21 @@
 	left: 50px;
 	height: 50px;
 	font-size: 5px;
+}
+
+#startTime{
+	position : absolute;
+	top : 165px;
+	left : 20px;
+	width : 50px;
+	height : 15px;
+	background-color : white;
+}
+#endTime{
+	position : absolute;
+	top : 165px;
+	left : 525px;
+	width : 50px;
+	height : 15px;
+	background-color : white;
 }

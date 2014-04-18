@@ -137,7 +137,7 @@ var x_axis = new Rickshaw.Graph.Axis.X({
 		element: document.getElementById('x_axis'),
 		tickFormat: function(d) {
 						var t = new Date(d);
-						return d3.time.format("%m/%d/%y")(t);
+						return d3.time.format("%b")(t);
 					},
 	});
 
@@ -215,4 +215,20 @@ function updateChart(geoid, TIMELS, left, right) {
 	graph.render();
 	y_axis.render();
 	y_axis1.render();
+	var start = d3.min(crimeLS, function(d){
+		return d.x;
+		});
+	var end = d3.max(crimeLS, function(d){
+		return d.x;
+	});
+	start = new Date(start);
+	end = new Date(end);
+	var startStr = d3.time.format("%m/%d/%y")(start);
+	var endStr = d3.time.format("%m/%d/%y")(end);
+	$(function(){
+		$("#startTime").html(startStr);
+		$("#endTime").html(endStr);
+	});
+	
+	
 }
