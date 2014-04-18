@@ -1,0 +1,43 @@
+#chart_container {
+	position: absolute;
+	width: 600px;
+	height: 175px;
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#chart {
+	margin-top: 5px;
+	float: left;
+}
+
+#timeLegend {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	background-color: transparent;
+	color: black;
+}
+
+
+#offset_form {
+	float: left;
+	margin: 2em 0 0 15px;
+	font-size: 13px;
+}
+#y_axis {
+	float: left;
+	width: 50px;
+	/*height: 10px*/
+}
+#y_axis1 {
+	float: right;
+	width: 50px;
+	/*height: 10px*/
+}
+#x_axis{
+	position: absolute;
+	top: 165px;
+	left: 50px;
+	height: 50px;
+	font-size: 5px;
+}
