@@ -47,17 +47,19 @@
 
 #startTime{
 	position : absolute;
-	top : 165px;
+	top : 168px;
 	left : 20px;
-	width : 50px;
+	width : 70px;
 	height : 15px;
+	color : green;
 	background-color : white;
 }
 #endTime{
 	position : absolute;
-	top : 165px;
+	top : 168px;
 	left : 525px;
-	width : 50px;
+	width : 70px;
 	height : 15px;
+	color : green;
 	background-color : white;
 }
