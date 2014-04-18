@@ -69,9 +69,10 @@ function getTimeList(geoid, LS, flag, left, right) {
 function getDisplayList(list){
 	var step = Math.floor(list.length/20);
 	var newLS = [];
+	newLS.push(list[0]);
 	for(var i = step-1; i < list.length; i += step){
 		var sum = 0;
-		for(j = i; j >= i-step+1; j--){
+		for(var j = i; j >= i-step+1; j--){
 			sum += list[j].y;
 		}
 		newLS.push({"x" : list[i].x, 

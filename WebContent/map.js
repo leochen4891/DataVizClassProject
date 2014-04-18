@@ -29,53 +29,36 @@ info.addTo(map);
 
 // get color depending on population density value
 
-function getColor(d, grades) {
-	return d > grades[6] ? '#BD0026' :
-	d > grades[5] ? '#E31A1C' :
-	d > grades[4] ? '#FC4E2A' :
-	d > grades[3] ? '#FD8D3C' :
-	d > grades[2] ? '#FEB24C' :
-	d > grades[1] ? '#FED976' :
-	'#FFEDA0';
-}
-function getRedColor(d, grades) {
-	return d > grades[6] ? '#BD0026' :
-	d > grades[5] ? '#E31A1C' :
-	d > grades[4] ? '#FC4E2A' :
-	d > grades[3] ? '#FD8D3C' :
-	d > grades[2] ? '#FEB24C' :
-	d > grades[1] ? '#FED976' :
-	'#FFEDA0';
+function value2grade(value, intervals) {
+	for (var i = 1; i < intervals.length; i++) {
+		if (value <= intervals[i])
+			return i-1;
+	}
 }
 
-function getGreenColor(d, grades) {
-	return d > grades[6] ? '#103800' :
-	d > grades[5] ? '#195400' :
-	d > grades[4] ? '#267F00' :
-	d > grades[3] ? '#32A800' :
-	d > grades[2] ? '#3FD300' :
-	d > grades[1] ? '#4CFF00' :
-	'#ABFF87';
+var orangePalette = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026'];
+var redPalette    = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026'];
+var greenPalette  = ['#ABFF87', '#4CFF00', '#3FD300', '#32A800', '#267F00', '#195400', '#103800'];
+var bluePalette   = ['#A3B8FF', '#688BFF', '#4772FF', '#265CFF', '#003FFF', '#0028A0', '#001556'];
+var yellowPalette = ['#F4FF7C', '#FFFF00', '#FFDD00', '#FFB200', '#FF8C00', '#FF6900', '#FF4200'];
+
+function getOrangeColor(value, intervals) {
+	return orangePalette[value2grade(value, intervals)];	
+}
+function getRedColor(value, intervals) {
+	return redPalette[value2grade(value, intervals)];	
 }
 
-function getBlueColor(d, grades) {
-	return d > grades[6] ? '#001556' :
-	d > grades[5] ? '#0028A0' :
-	d > grades[4] ? '#003FFF' :
-	d > grades[3] ? '#265CFF' :
-	d > grades[2] ? '#4772FF' :
-	d > grades[1] ? '#688BFF' :
-	'#A3B8FF';
+function getGreenColor(value, intervals) {
+	return greenPalette[value2grade(value, intervals)];	
 }
 
-function getYellowColor(d, grades) {
-	return d > grades[6] ? '#FF4200' :
-	d > grades[5] ? '#FF6900' :
-	d > grades[4] ? '#FF8C00' :
-	d > grades[3] ? '#FFB200' :
-	d > grades[2] ? '#FFDD00' :
-	d > grades[1] ? '#FFFF00' :
-	'#F4FF7C';
+function getBlueColor(value, intervals) {
+	return bluePalette[value2grade(value, intervals)];
+}
+
+function getYellowColor(value, intervals) {
+	return bluePalette[value2grade(value, intervals)];
 }
 function style(feature) {
 	return {
@@ -208,7 +191,7 @@ function updateLegend(pgrades, flag) {
 					Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
 			} else {
 				labels.push(
-					'<i style="background:' + getColor(from + 1, pgrades) + '"></i> ' +
+					'<i style="background:' + getOrangeColor(from + 1, pgrades) + '"></i> ' +
 					Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
 			}
 		}

@@ -61,7 +61,9 @@ function addChernoff() {
 }
 
 function getScale(geoid) {
-	return Math.random() * 1.4;
+	var pop = getPop(geoid);
+	var grade = value2grade(pop, Status.pop.eint);
+	
 }
 
 // skin is the income, 1 to 10, 10 is the highest
