@@ -238,6 +238,8 @@ $('#dataM').change(function () {
 
 /****** Color Menu Event **********/
 $('#schemeM').change(function () {
+	setChernoffVisible(false);
+	setChernoffVisible(true);
 	if ($(this).val() == 'equalInterval') {
 		if ($('#dataM').val() === 'pop') {
 			geojson.clearLayers();

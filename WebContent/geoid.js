@@ -6,7 +6,7 @@ var SSS = {
 "vCrimeN":0,
 "rateN":0,
 "rateR":0
-}
+};
 
 function updateGeoid(geoid, left, right){
 	var test = document.getElementById("test");

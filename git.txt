@@ -1,0 +1,23 @@
+//first time set up
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+
+
+git pull
+//switch branch
+git checkout dev
+
+//make new branch
+git checkout -b <new branch>
+
+//reset to last commit
+git reset --hard
+
+//check current status
+git status
+
+//before commit
+git add --all
+
+//make remote branch
+git push -u origin hong_dev

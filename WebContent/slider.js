@@ -12,6 +12,8 @@
             end = ui.values[1];
 			updateChart(geoid, TIMELS, start, end);
 			updateGrade(start, end);
+			updateParaLines();
+			drawParallel("canvasParallel");
 			if ($('#dataM').val() == 'crime') {
 				if (!$('#chk1').prop("checked")) {
 					setMapGrades();

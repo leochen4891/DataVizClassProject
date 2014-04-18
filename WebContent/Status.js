@@ -7,7 +7,7 @@ function addstring(text, s) {
 	var content = document.createTextNode(s);
 	text.appendChild(content);
 }
-var geoid;
+var geoid = 4013103604;
 var start;
 var end;
 
@@ -17,7 +17,7 @@ paraAvgLine.COL = "#FF0000";
 var paraMedLine = new Object();
 paraMedLine.COL = "#00FF00";
 var paraGeoidLine = new Object();
-paraGeoidLine.COL = "#0000FF";
+paraGeoidLine.COL = "#000000";
 
 paraLines[0] = paraAvgLine;
 paraLines[1] = paraMedLine;
@@ -74,6 +74,13 @@ var Status = {
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
+	},
+	rateP: {
+		"total" : 0,
+		"ave" : 0,
+		"med" : 0,
+		"eint" : [],
+		"qint" : []
 	}
 };
 function calcTotal(flag, start, end) {
@@ -105,7 +112,19 @@ function vCount(start, end) {
 	}
 	return vCount;
 }
-
+function sCount(flag, start, end){
+	var c = tractData.features;
+	var ct = 0;
+	for (var i = 0; i < c.length; i++) {
+		var item = c[i].properties;
+		for (var j = start; j <= end; j++) {
+			if (item[flag + j] != 0){
+				ct++;
+			}
+		}
+	}
+	return ct;
+}
 function total(str) {
 	var list = tractData.features;
 	var sum = 0;
@@ -131,6 +150,22 @@ function sumList(flag, start, end) {
 	return list;
 }
 
+function getAveList(start, end){
+	var nList = sumList('R_M', start, end);
+	var rList = sumList('S_M', start, end);
+	var aveList = [];
+	for (var i = 0; i < nList.length; i++){
+		aveList.push(rList[i]/nList[i]);
+	}
+	return aveList;
+}
+
+
+function getAveGrades(aveList){
+	var list = aveList.sort(function(a, b){ return a-b;});
+	Status.rateP.eint = equalInt(list);
+	Status.rateP.qint = quantInt(list);
+}
 function totList(flag) {
 	var c = tractData.features;
 	var list = [];
@@ -180,7 +215,7 @@ function getGrade(start, end) {
 		});
 
 	Status.crimeN.total = calcTotal('C_M', start, end);
-	Status.crimeN.ave = Status.crimeN.total / num;
+	Status.crimeN.ave = Status.crimeN.total / sCount('C_M', start, end);
 	Status.crimeN.med = median(slist);
 	Status.crimeN.eint = equalInt(slist);
 	Status.crimeN.qint = quantInt(slist);
@@ -191,7 +226,7 @@ function getGrade(start, end) {
 		});
 
 	Status.vCrimeN.total = calcTotal('VC_M', start, end);
-	Status.vCrimeN.ave = Status.vCrimeN.total / num;
+	Status.vCrimeN.ave = Status.vCrimeN.total / sCount('VC_M', start, end);
 	Status.vCrimeN.med = median(slist);
 	Status.vCrimeN.eint = equalInt(slist);
 	Status.vCrimeN.qint = quantInt(slist);
@@ -202,7 +237,7 @@ function getGrade(start, end) {
 		});
 
 	Status.rateN.total = calcTotal('R_M', start, end);
-	Status.rateN.ave = Status.rateN.total / num;
+	Status.rateN.ave = Status.rateN.total / sCount('R_M', start, end);
 	Status.rateN.med = median(slist);
 	Status.rateN.eint = equalInt(slist);
 	Status.rateN.qint = quantInt(slist);
@@ -213,7 +248,7 @@ function getGrade(start, end) {
 		});
 
 	Status.rateR.total = calcTotal('S_M', start, end);
-	Status.rateR.ave = Status.rateR.total / num;
+	Status.rateR.ave = Status.rateR.total / sCount('S_M', start, end);
 	Status.rateR.med = median(slist);
 	Status.rateR.eint = equalInt(slist);
 	Status.rateR.qint = quantInt(slist);
@@ -224,7 +259,7 @@ function getGrade(start, end) {
 		});
 
 	Status.pop.total = total('Population');
-	Status.pop.ave = Status.pop.total / num;
+	Status.pop.ave = Status.pop.total / len;
 	Status.pop.med = median(slist);
 	Status.pop.eint = equalInt(slist);
 	Status.pop.qint = quantInt(slist);
@@ -235,10 +270,12 @@ function getGrade(start, end) {
 		});
 
 	Status.income.total = total('Income');
-	Status.income.ave = Status.income.total / num;
+	Status.income.ave = Status.income.total / len;
 	Status.income.med = median(slist);
 	Status.income.eint = equalInt(slist);
 	Status.income.qint = quantInt(slist);
+	
+	getAveGrades(getAveList(start, end));
 }
 
 function updateGrade(start, end) {
@@ -250,7 +287,7 @@ function updateGrade(start, end) {
 		});
 
 	Status.crimeN.total = calcTotal('C_M', start, end);
-	Status.crimeN.ave = Status.crimeN.total / num;
+	Status.crimeN.ave = Status.crimeN.total / sCount('C_M', start, end);
 	Status.crimeN.med = median(slist);
 	Status.crimeN.eint = equalInt(slist);
 	Status.crimeN.qint = quantInt(slist);
@@ -261,7 +298,7 @@ function updateGrade(start, end) {
 		});
 
 	Status.vCrimeN.total = calcTotal('VC_M', start, end);
-	Status.vCrimeN.ave = Status.vCrimeN.total / num;
+	Status.vCrimeN.ave = Status.vCrimeN.total / sCount('VC_M', start, end);
 	Status.vCrimeN.med = median(slist);
 	Status.vCrimeN.eint = equalInt(slist);
 	Status.vCrimeN.qint = quantInt(slist);
@@ -272,7 +309,7 @@ function updateGrade(start, end) {
 		});
 
 	Status.rateN.total = calcTotal('R_M', start, end);
-	Status.rateN.ave = Status.rateN.total / num;
+	Status.rateN.ave = Status.rateN.total / sCount('R_M', start, end);
 	Status.rateN.med = median(slist);
 	Status.rateN.eint = equalInt(slist);
 	Status.rateN.qint = quantInt(slist);
@@ -283,10 +320,12 @@ function updateGrade(start, end) {
 		});
 
 	Status.rateR.total = calcTotal('S_M', start, end);
-	Status.rateR.ave = Status.rateR.total / num;
+	Status.rateR.ave = Status.rateR.total / sCount('S_M', start, end);
 	Status.rateR.med = median(slist);
 	Status.rateR.eint = equalInt(slist);
 	Status.rateR.qint = quantInt(slist);
+	
+	getAveGrades(getAveList(start, end));
 }
 
 function updateParaLines() {

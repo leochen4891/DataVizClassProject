@@ -7,7 +7,7 @@ busi[0].stars[1] = 8;
 busi[0].stars[2] = 9;
 busi[0].stars[3] = 15;
 busi[0].stars[4] = 8;
-busi[0].id
+
 
 busi[1] = new Object;
 busi[1].name = "Jack in the box";

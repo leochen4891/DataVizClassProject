@@ -62,35 +62,100 @@ function addChernoff() {
 
 function getScale(geoid) {
 	var pop = getPop(geoid);
-	var grade = value2grade(pop, Status.pop.eint);
-	
+	var grade = 3*value2grade(pop, Status.pop.eint) / Status.pop.eint.length;
+	return grade;
 }
 
 // skin is the income, 1 to 10, 10 is the highest
 function getSkin(geoid) {
-	return Math.floor((Math.random() * 7) + 1);
+	var currentIncome = getIncome(geoid);
+	var currentGrades = [];
+	$(function(){
+		if ( $('#schemeM').val() == 'equalInterval'){
+			currentGrades = Status.income.eint;
+		}
+		else{
+			currentGrades = Status.income.qint;
+		}
+	});
+	return getGradeIndex(currentIncome, currentGrades);
 }
 
 // eye is the crime
 function getEye(geoid, begin, end) {
-	return Math.floor((Math.random() * 7) + 1);
+	var nSum = getCrime(geoid, begin, end);
+	var currentGrades = [];
+	$(function(){
+		if ( $('#schemeM').val() == 'equalInterval'){
+			currentGrades = Status.crimeN.eint;
+		}
+		else{
+			currentGrades = Status.crimeN.qint;
+		}
+	});
+	return getGradeIndex(nSum , currentGrades);
 }
 
 // eyebrow is the vio-crime
 function getEyebrow(geoid, begin, end) {
-	return Math.floor((Math.random() * 7) + 1);
+	var currentVCrime = getVioCrime(geoid, begin, end);
+	var currentGrades = [];
+	$(function(){
+		if ( $('#schemeM').val() == 'equalInterval'){
+			currentGrades = Status.crimeN.eint;
+		}
+		else{
+			currentGrades = Status.crimeN.qint;
+		}
+	});
+	return getGradeIndex(currentVCrime, currentGrades);
 }
 
 // smile is the avg-rating
 function getSmile(geoid, begin, end) {
-	return Math.floor((Math.random() * 7) + 1);
+	var nSum = getReview(geoid, begin, end);
+	var rSum = getStar(geoid, begin, end);
+	var ave = rSum / nSum;
+	
+	var currentGrades = [];
+	$(function(){
+		if ( $('#schemeM').val() == 'equalInterval'){
+			currentGrades = Status.rateP.eint;
+		}
+		else{
+			currentGrades = Status.rateP.qint;
+		}
+	});
+	return getGradeIndex(ave, currentGrades);
 }
 
 // mouth is the review
 function getMouth(geoid, begin, end) {
-	return Math.floor((Math.random() * 7) + 1);
+	var sum = getReview(geoid, begin, end);
+	//var rList = GEOIDTable[geoid].slice(28, GEOIDTable[geoid].length);
+	
+	var currentGrades = [];
+	$(function(){
+		if ( $('#schemeM').val() == 'equalInterval'){
+			currentGrades = Status.rateN.eint;
+		}
+		else{
+			currentGrades = Status.rateR.qint;
+		}
+	});
+	return getGradeIndex(sum, currentGrades);
 }
 
+function getGradeIndex(item, grades){
+	var index = 1;
+	for(var i = 1; i < grades.length; i++){
+		if(item <= grades[i]){
+			index = i;
+			break;
+		}
+	}
+	return index; 
+}
 // Input:
 // - canvasName: elementId in the html file
 // - posX and posY: center position of the face

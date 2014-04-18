@@ -37,7 +37,7 @@ function drawParallel(canvasName) {
 	var c = document.getElementById(canvasName);
 	var ctx = c.getContext("2d");
     ctx.clearRect(0, 0, c.width, c.height);
-    ctx.translate(0.5, 0.5); // to fix the blurry text issue
+   // ctx.translate(0.5, 0.5); // to fix the blurry text issue
 
 	var WIDTH = 400;
 	var HEIGHT = 240;
