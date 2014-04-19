@@ -59,6 +59,7 @@ function drawParallel(canvasName) {
 
 	// draw each axis
 	var keys = Object.keys(Status);
+	//alert(keys);
 	for (var i = 0; i < keys.length; i++) {
 		var entryCount = keys.length;
 		var entryWidth = (WIDTH - MARGIN_LEFT - MARGIN_RIGHT)
@@ -80,6 +81,7 @@ function drawParallel(canvasName) {
 
 		// scale bar and numbers on vertical line
 		var intervals = Status[keys[i]].eint;
+		//alert(intervals);
 		var entryHeight = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) / (intervals.length - 1)
 		var barWidth = 5;
 		for (var j = 0; j < intervals.length; j++) {
@@ -105,7 +107,7 @@ function drawParallel(canvasName) {
 
 	// draw data lines
 	//for (var i = 0; i < paraLines.length; i++) {
-        var i = 1;
+        var i = 0;
 	    var keys = Object.keys(paraLines[i]);
         //alert(paraLines[i]);
 	    ctx.strokeStyle = paraLines[i].COL;

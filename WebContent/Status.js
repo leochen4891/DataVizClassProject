@@ -68,14 +68,14 @@ var Status = {
 		"eint" : [],
 		"qint" : []
 	},
-	STR : {
+	RAT : {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
 	},
-	RAT: {
+	STR: {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
@@ -152,20 +152,44 @@ function sumList(flag, start, end) {
 
 function getAveList(start, end){
 	var nList = sumList('R_M', start, end);
+	//alert(nList);
 	var rList = sumList('S_M', start, end);
+	//alert(rList);
 	var aveList = [];
 	for (var i = 0; i < nList.length; i++){
-		aveList.push(rList[i]/nList[i]);
+		if(nList[i] != 0){
+			aveList.push(rList[i]/nList[i]);
+		}
+		else{
+			aveList.push(0);
+		}
 	}
+	//alert(aveList);
 	return aveList;
 }
 
 
 function getAveGrades(aveList){
-	var list = aveList.sort(function(a, b){ return a-b;});
+	var list = aveList.sort(function(a, b){ 
+		return a-b;
+	});
 	Status.RAT.eint = equalInt(list);
 	Status.RAT.qint = quantInt(list);
+	
+	Status.RAT.med = list[list.length/2];
 }
+
+function getAveInfo(start, end){
+	var alist = getAveList(start, end);
+	var sum = 0;
+	for(var i = 0; i < alist.length; i++){
+		sum += alist[i];
+	}
+	Status.RAT.total = sum;
+	Status.RAT.ave = 3.3;//sum / vCount(start, end);
+	getAveGrades(alist);
+}
+
 function totList(flag) {
 	var c = tractData.features;
 	var list = [];
@@ -275,7 +299,7 @@ function getGrade(start, end) {
 	Status.INC.eint = equalInt(slist);
 	Status.INC.qint = quantInt(slist);
 	
-	getAveGrades(getAveList(start, end));
+	getAveInfo(start, end);
 }
 
 function updateGrade(start, end) {
@@ -325,7 +349,7 @@ function updateGrade(start, end) {
 	Status.STR.eint = equalInt(slist);
 	Status.STR.qint = quantInt(slist);
 	
-	getAveGrades(getAveList(start, end));
+	getAveInfo(start, end);
 }
 
 function updateParaLines() {
