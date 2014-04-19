@@ -135,9 +135,11 @@ function onTileClick(e) {
 	});
 
 	//update mosaic
+	mosaicIndex = 0;
+
 	updateBusiList();
 	drawMosaic();
-	
+	drawTagCloud();
 }
 
 

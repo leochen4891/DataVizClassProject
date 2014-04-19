@@ -1,8 +1,12 @@
 var busiList = new Array();
+var totalStars = 0;
+var busiStars = new Array();
+var busiHeights = new Array();
 
 // from geoid to get top 5 most reviewed business id
 function updateBusiList() {
-	//console.log("------------------- update top 5 busi list ----------------------");
+	// console.log("------------------- update top 5 busi list
+	// ----------------------");
 	var gid = Number(geoid);
 	for (var i = 0; i < 5; i++) {
 		busiList[i] = new Object;
@@ -21,28 +25,30 @@ function updateBusiList() {
 			try {
 				var curid = top5busiList[gid][i];
 				busiList[i].id = curid;
-				//console.log("id " + i + ":" + busiid);
+				// console.log("id " + i + ":" + busiid);
 				busiList[i].name = busiStarsList[curid][0];
-				//console.log("name " + i + ":" + busiList[i].name);
+				// console.log("name " + i + ":" + busiList[i].name);
 				busiList[i].stars = new Array();
 				var start;
 				var end;
-				$(function(){
+				$(function() {
 					start = $('#slider').slider("values", 0);
 					end = $('#slider').slider("values", 1);
 				});
 				var stars = getStars(curid, start, end);
 				busiList[i].stars = stars;
 			} catch (err) {
-				//console.log("i = " + i);
+				// console.log("i = " + i);
 			}
 		}
 	}
+
+	busiid = busiList[0].id;
 }
 
 function getStars(curid, start, end) {
 	var STARS_OFFSET = 1;
-	var starsCount = [0,0,0,0,0];
+	var starsCount = [ 0, 0, 0, 0, 0 ];
 
 	for (var mon = start; mon <= end; mon++) {
 		var str = busiStarsList[curid][STARS_OFFSET + mon];
@@ -56,17 +62,48 @@ function getStars(curid, start, end) {
 
 //
 
-var mosaicEntryHeight;
-//drawMosaic();
+document.getElementById("canvasMosaic").addEventListener('mousedown', mouseDownHandler, false);
+document.getElementById("canvasMosaic").addEventListener('mousemove', mouseMoveHandler, false);
 
-document.getElementById("canvasMosaic").addEventListener('mousedown',
-		mouseDownHandler, false);
+function mouseMoveHandler(event) {
+	var canvas = document.getElementById("canvasMosaic");
+	var mousePos = getMousePos(canvas, event);
 
+	var offset = 0;
+	var i = 0;
+	for (i = 0; i < busiList.length; i++) {
+		offset += busiHeights[i];
+		//alert("i = " + i + ", mouse.Y = " + mousePos.y + ", offset = " + offset);
+		if (mousePos.y <= offset) {
+			break;
+		}
+	}
+	
+	  var context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      drawMosaic();
+      context.font = '18pt Calibri';
+      context.fillStyle = 'black';
+      context.fillText("Mouse position: " + mousePos.x + "," + mousePos.y, 10, 25);	
+};
 
 function mouseDownHandler(event) {
 	var canvas = document.getElementById("canvasMosaic");
 	var mousePos = getMousePos(canvas, event);
-	mosaicIndex = (Math.floor((mousePos.y / mosaicEntryHeight)));
+
+	var offset = 0;
+	var i = 0;
+	for (i = 0; i < busiList.length; i++) {
+		offset += busiHeights[i];
+		//alert("i = " + i + ", mouse.Y = " + mousePos.y + ", offset = " + offset);
+		if (mousePos.y <= offset) {
+			break;
+		}
+	}
+
+	mosaicIndex = i;
+	//alert(mosaicIndex);
+	// mosaicIndex = (Math.floor((mousePos.y / mosaicEntryHeight)));
 	busiid = busiList[mosaicIndex].id;
 	drawMosaic();
 	drawTagCloud();
@@ -95,15 +132,38 @@ function drawMosaic() {
 	var WIDTH = 400;
 	var HEIGHT = 240;
 	var COUNT_MAX = 5;
-	var FONT_HEIGHT_MAX = 22;
+	var FONT_HEIGHT_MAX = 32;
 
 	var count = Math.min(COUNT_MAX, busiList.length);
-	mosaicEntryHeight = HEIGHT / count;
-	var fontHeight = Math.min(FONT_HEIGHT_MAX, mosaicEntryHeight * 0.8);
+
+	totalStars = 0;
+	busiStars = new Array();
+	busiHeights = new Array();
+
+	for (var i = 0; i < count; i++) {
+		busiStars[i] = 0;
+		for (var j = 0; j < 5; j++) {
+			busiStars[i] += busiList[i].stars[j];
+			totalStars += busiList[i].stars[j];
+		}
+	}
+
+	for (var i = 0; i < count; i++) {
+		busiHeights[i] = HEIGHT * (busiStars[i] / totalStars);
+	}
+
+	console.log("---------- total = " + totalStars + " -------------------");
+	for (var i = 0; i < count; i++) {
+		console.log("id = " + busiList[i].name + ", stars = " + busiStars[i]
+				+ ", height = " + busiHeights[i]);
+	}
+
+	var offset = 0;
 
 	for (var r = 0; r < count; r++) {
 		var posX = 0;
-		var posY = r * mosaicEntryHeight;
+		var posY = offset;
+		offset += busiHeights[r];
 
 		if (r == 1)
 			ctx.fillStyle = "red";
@@ -120,22 +180,23 @@ function drawMosaic() {
 			var width = WIDTH * busiList[r].stars[c] / total;
 			// alert((posX + offsetX) + ", " + posY + ", " + width + ", " +
 			// (mosaicEntryHeight - 1));
-			ctx.fillRect(posX + offsetX, posY, width, mosaicEntryHeight - 1);
+			ctx.fillRect(posX + offsetX, posY, width, busiHeights[r] - 1);
 			ctx.fill();
 			leftSide += busiList[r].stars[c];
 		}
 
-		// alert("r = " + r + ", index = " + mosaicIndex);
 		if (r == mosaicIndex) {
 			ctx.fillStyle = "red";
+			var fontHeight = Math.min(FONT_HEIGHT_MAX, Math.floor(busiHeights[r] * 0.5));
 			ctx.font = 1.2 * fontHeight + "px Arial";
-			ctx.fillText(busiList[r].name, 15, (r + 0.5) * mosaicEntryHeight
-					+ fontHeight / 2);
+			var textOffset = posY + busiHeights[r] * 0.5 + fontHeight * 0.5;
+			ctx.fillText(busiList[r].name, 10, textOffset);
 		} else {
 			ctx.fillStyle = "black";
+			var fontHeight = Math.min(FONT_HEIGHT_MAX, Math.floor(busiHeights[r] * 0.5));
 			ctx.font = fontHeight + "px Arial";
-			ctx.fillText(busiList[r].name, 10, (r + 0.5) * mosaicEntryHeight
-					+ fontHeight / 2);
+			var textOffset = posY + busiHeights[r] * 0.5 + fontHeight * 0.5;
+			ctx.fillText(busiList[r].name, 10, textOffset);
 		}
 
 		ctx.fill();

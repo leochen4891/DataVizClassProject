@@ -1,10 +1,10 @@
 var tagHash;// = new HashTable();
-var top20Words// = new Array();
+var top20Words;// = new Array();
 var fill;// = d3.scale.category20();
 
 function drawTagCloud() {
-	var start;
-	var end;
+	var start = 1;
+	var end = 24;
 	$(function() {
 		start = $('#slider').slider("values", 0);
 		end = $('#slider').slider("values", 1);
@@ -20,7 +20,7 @@ function drawTagCloud() {
 
 	var arrayWords = new Array();
 	arrayWords = top20Words;
-	var canvas = d3.select("p").html("");
+	d3.select("p").html("");
 	d3.layout.cloud().size([ 400, 224 ]).words(arrayWords.map(function(d) {
 		return {
 			text : d,
@@ -115,7 +115,6 @@ function findTop20(s1, monthStart, monthEnd) {
 	//document.write(length);
 
 	for (var i = startIndex; i <= stopIndex; i++) {
-
 		var m = s1[i - 1];
 		var singleWord = m.split(";");
 		var length1 = singleWord.length;
