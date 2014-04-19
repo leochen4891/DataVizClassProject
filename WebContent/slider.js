@@ -4,7 +4,7 @@
 		range : true,
 		min : 1,
 		max : 24,
-		values : [2, 5],
+		values : [1, 24],
 		slide : function (event, ui) {
 			
             // should always update Status
@@ -12,7 +12,7 @@
             var end = ui.values[1];
 			updateChart(geoid, TIMELS, start, end);
 			updateGrade(start, end);
-			/* TEST */ 
+			/* TEST 
 			var test = document.getElementById("test");
 			var testStr = "ave = " + Status.RAT.ave;
 			addstring(test, testStr);
@@ -20,7 +20,7 @@
 			testStr = "med = " + Status.RAT.med;
 			addstring(test, testStr);
 			newline(test);
-			 /* end */
+			  end */
 			updateParaLines();
 			drawParallel("canvasParallel");
 			if ($('#dataM').val() == 'crime') {
