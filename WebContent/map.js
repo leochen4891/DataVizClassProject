@@ -5,14 +5,11 @@ var map = L.map('map').setView([33.60, -112.10], 10.1);
 map.on('zoomend', onZoomChange);
 
 function onZoomChange(e){
-	//$(function(){
-		//if( $('#setChernoffVisible').prop("checked") ){
-			//alert("checked");
-		
+		var box = document.getElementById('checkboxShowFaces');
+		if (box.checked == true){
 			setChernoffVisible(false);
 			setChernoffVisible(true);
-		//}
-	//});
+		}
 }
 /*var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
 attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
