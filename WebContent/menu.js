@@ -32,7 +32,6 @@ $('#dataM').change(function () {
 			updateLegend(Status.POP.qint, 'blue');
 		}
 		info.update = function (props) {
-			var n = 10;
 			this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 					'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 					'<br /><b>Income: </b> $' + props.Income
@@ -70,7 +69,6 @@ $('#dataM').change(function () {
 			updateLegend(Status.INC.qint, 'green');
 		}
 		info.update = function (props) {
-			var n = 10;
 			this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 					'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 					'<br /><b>Income: </b> $' + props.Income
@@ -83,10 +81,8 @@ $('#dataM').change(function () {
 		$("#amount").val("Month" + left + " - Month" + right);
 		var monthTotal = 0;
 		geojson.clearLayers();
-		var currentFeature = {};
 		geojson = L.geoJson(tractData, {
 				style : function (feature) {
-					currentFeature = feature;
 					monthTotal = 0;
 					if (left != right) {
 						for (var i = left; i <= right; i++) {
@@ -228,7 +224,6 @@ $('#dataM').change(function () {
 					monthTotal = Num;
 				}
 			}
-			var n = 10;
 			this._div.innerHTML = '<h4>Number of Reviews over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
 					'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Reviews: </b>' + monthTotal
 					 : 'Hover over a census tract');
@@ -251,7 +246,6 @@ $('#schemeM').change(function () {
 				}).addTo(map);
 			updateLegend(Status.POP.eint, 'blue');
 			info.update = function (props) {
-				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 						'<br /><b>Income: </b> $' + props.Income
@@ -274,7 +268,6 @@ $('#schemeM').change(function () {
 				}).addTo(map);
 			updateLegend(Status.INC.eint, 'green');
 			info.update = function (props) {
-				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 						'<br /><b>Income: </b> $' + props.Income
@@ -287,10 +280,8 @@ $('#schemeM').change(function () {
 			$("#amount").val("Month" + left + " - Month" + right);
 			var monthTotal = 0;
 			geojson.clearLayers();
-			var currentFeature = {};
 			geojson = L.geoJson(tractData, {
 					style : function (feature) {
-						currentFeature = feature;
 						monthTotal = 0;
 						if (left != right) {
 							for (var i = left; i <= right; i++) {
@@ -351,7 +342,6 @@ $('#schemeM').change(function () {
 						monthTotal = Num;
 					}
 				}
-				var n = 10;
 				this._div.innerHTML = '<h4>Crime Number over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Crimes: </b>' + monthTotal
 						 : 'Hover over a census tract');
@@ -401,7 +391,6 @@ $('#schemeM').change(function () {
 						monthTotal = Num;
 					}
 				}
-				var n = 10;
 				this._div.innerHTML = '<h4>Number of Reviews over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Reviews: </b>' + monthTotal
 						 : 'Hover over a census tract');
@@ -425,7 +414,6 @@ $('#schemeM').change(function () {
 				}).addTo(map);
 			updateLegend(Status.POP.qint, 'blue');
 			info.update = function (props) {
-				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 						'<br /><b>Income: </b> $' + props.Income
@@ -448,7 +436,6 @@ $('#schemeM').change(function () {
 				}).addTo(map);
 			updateLegend(Status.INC.qint, 'green');
 			info.update = function (props) {
-				var n = 10;
 				this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 						'<br /><b>Income: </b> $' + props.Income
@@ -461,10 +448,8 @@ $('#schemeM').change(function () {
 			$("#amount").val("Month" + left + " - Month" + right);
 			var monthTotal = 0;
 			geojson.clearLayers();
-			var currentFeature = {};
 			geojson = L.geoJson(tractData, {
 					style : function (feature) {
-						currentFeature = feature;
 						monthTotal = 0;
 						if (left != right) {
 							for (var i = left; i <= right; i++) {
@@ -525,7 +510,6 @@ $('#schemeM').change(function () {
 						monthTotal = Num;
 					}
 				}
-				var n = 10;
 				this._div.innerHTML = '<h4>Crime Number over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Crimes: </b>' + monthTotal
 						 : 'Hover over a census tract');
@@ -575,7 +559,6 @@ $('#schemeM').change(function () {
 						monthTotal = Num;
 					}
 				}
-				var n = 10;
 				this._div.innerHTML = '<h4>Number of Reviews over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
 						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Reviews: </b>' + monthTotal
 						 : 'Hover over a census tract');
