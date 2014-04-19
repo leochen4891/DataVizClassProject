@@ -167,7 +167,7 @@ function getMouth(geoid, begin, end) {
 			currentGrades = Status.REV.eint;
 		}
 		else{
-			currentGrades = Status.STR.qint;
+			currentGrades = Status.REV.qint;
 		}
 	});
 	return getGradeIndex(sum, currentGrades);
