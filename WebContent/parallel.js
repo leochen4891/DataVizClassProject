@@ -29,12 +29,10 @@
  */
 
 updateParaLines();
-//TEST
-paraAvgLine.STR = 3.3;
 
-Status.rateR.eint = [1,2,3,4,5,7,8];
-
+alert("mark0");
 drawParallel("canvasParallel");
+alert("mark1");
 
 function drawParallel(canvasName) {
     // prepare the 3 lines, avg, med, and target
