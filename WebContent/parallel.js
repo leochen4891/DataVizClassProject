@@ -83,7 +83,7 @@ function drawParallel(canvasName) {
 		// scale bar and numbers on vertical line
 		var intervals = Status[keys[i]].eint;
 		//alert(intervals);
-		var entryHeight = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) / (intervals.length - 1)
+		var entryHeight = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) / (intervals.length - 1);
 		var barWidth = 5;
 		for (var j = 0; j < intervals.length; j++) {
 
@@ -107,8 +107,7 @@ function drawParallel(canvasName) {
 	}
 
 	// draw data lines
-	//for (var i = 0; i < paraLines.length; i++) {
-        var i = 0;
+	for (var i = paraLines.length-1; i >= 0; i--) {
 	    var keys = Object.keys(paraLines[i]);
         //alert(paraLines[i]);
 	    ctx.strokeStyle = paraLines[i].COL;
@@ -119,19 +118,23 @@ function drawParallel(canvasName) {
 	    	var value = paraLines[i][keys[j+1]];
 	    	var max = intervals[intervals.length - 1];
 	    	var min = intervals[0];
+	    	var temp = (value - min) / (max - min);
 	    	var offset = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT)
-	    			* ((value - min) / (max - min));
+	    			* (temp);
 	    	var posX = MARGIN_LEFT + entryWidth * j;
-		var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT - offset;
+	    	var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT - offset;
 
-		if (j == 0) {
-			ctx.moveTo(posX, posY);
-		} else {
-			ctx.lineTo(posX, posY);
-		}
+	    	/*if (j == 5) {
+	    		alert(keys[j+1]);
+	    	}*/
+	    	if (j == 0) {
+	    		ctx.moveTo(posX, posY);
+	    	} else {
+	    		ctx.lineTo(posX, posY);
+	    }
 
 	}
 	ctx.stroke();
 
-	// }
+	}
 }

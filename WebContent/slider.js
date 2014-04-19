@@ -8,10 +8,19 @@
 		slide : function (event, ui) {
 			
             // should always update Status
-            start = ui.values[0];
-            end = ui.values[1];
+            var start = ui.values[0];
+            var end = ui.values[1];
 			updateChart(geoid, TIMELS, start, end);
 			updateGrade(start, end);
+			/* TEST */ 
+			var test = document.getElementById("test");
+			var testStr = "ave = " + Status.RAT.ave;
+			addstring(test, testStr);
+			newline(test);
+			testStr = "med = " + Status.RAT.med;
+			addstring(test, testStr);
+			newline(test);
+			 /* end */
 			updateParaLines();
 			drawParallel("canvasParallel");
 			if ($('#dataM').val() == 'crime') {
