@@ -384,12 +384,12 @@ function updateParaLines() {
     paraMedLine.RAT = Status.RAT.ave;
 
     if (null != geoid) {
-        paraGeoidLine.POP = getPop(parseInt(geoid));
-        paraGeoidLine.INC = getIncome(parseInt(geoid));
-        paraGeoidLine.CRM = getCrime(parseInt(geoid), start, end);
-        paraGeoidLine.VCR = getVioCrime(parseInt(geoid), start, end);
-        paraGeoidLine.REV = getReview(parseInt(geoid), start, end);
-        paraGeoidLine.RAT = getStar(parseInt(geoid), start, end);
+        paraGeoidLine.POP = getPop(Number(geoid));
+        paraGeoidLine.INC = getIncome(Number(geoid));
+        paraGeoidLine.CRM = getCrime(Number(geoid), start, end);
+        paraGeoidLine.VCR = getVioCrime(Number(geoid), start, end);
+        paraGeoidLine.REV = getReview(Number(geoid), start, end);
+        paraGeoidLine.RAT = getStar(Number(geoid), start, end);
     }
 }
 
