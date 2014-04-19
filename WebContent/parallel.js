@@ -30,9 +30,9 @@
 
 updateParaLines();
 
-alert("mark0");
+//alert("mark0");
 drawParallel("canvasParallel");
-alert("mark1");
+//alert("mark1");
 
 function drawParallel(canvasName) {
     // prepare the 3 lines, avg, med, and target
@@ -63,7 +63,7 @@ function drawParallel(canvasName) {
 	// draw each axis
 	var keys = Object.keys(Status);
 	//alert(keys);
-	for (var i = 0; i < keys.length; i++) {
+	for (var i = 0; i < keys.length-1; i++) {
 		var entryCount = keys.length;
 		var entryWidth = (WIDTH - MARGIN_LEFT - MARGIN_RIGHT)
 				/ (entryCount - 1);
@@ -109,8 +109,7 @@ function drawParallel(canvasName) {
 	}
 
 	// draw data lines
-	//for (var i = 0; i < paraLines.length; i++) {
-        var i = 0;
+	for (var i = paraLines.length-1; i >= 0; i--) {
 	    var keys = Object.keys(paraLines[i]);
         //alert(paraLines[i]);
 	    ctx.strokeStyle = paraLines[i].COL;
@@ -124,16 +123,16 @@ function drawParallel(canvasName) {
 	    	var offset = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT)
 	    			* ((value - min) / (max - min));
 	    	var posX = MARGIN_LEFT + entryWidth * j;
-		var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT - offset;
+	    	var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT - offset;
 
-		if (j == 0) {
-			ctx.moveTo(posX, posY);
-		} else {
-			ctx.lineTo(posX, posY);
-		}
+	    	if (j == 0) {
+	    		ctx.moveTo(posX, posY);
+	    	} else {
+	    		ctx.lineTo(posX, posY);
+	    }
 
 	}
 	ctx.stroke();
 
-	// }
+	}
 }

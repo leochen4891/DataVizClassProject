@@ -125,6 +125,16 @@ function onTileClick(e) {
 		updateParaLines();
 		drawParallel("canvasParallel");
 	});
+	
+	var layer = e.target;
+	geojson.resetStyle(layer);
+	layer.setStyle({
+		weight : 5,
+		color : '#666',
+		dashArray : '',
+		fillOpacity : 0.7
+	});
+	
 }
 
 

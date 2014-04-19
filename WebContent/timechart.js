@@ -66,9 +66,40 @@ function getTimeList(geoid, LS, flag, left, right) {
 	return newLS;
 }
 
-function getDisplayList(list){
+function getDisplayList(list, flag){
 	var step = Math.floor(list.length/20);
 	var newLS = [];
+	
+	/*var dayM = 86400000;
+	var initDay = new Date(2012, 0, 1);
+	var geo = Number(geoid);
+	var preDay = new Date(list[0].x);
+	preDay.setDate(preDay.getDate() - step + 1);
+	var firstDay = TIMELS[0].DATE;
+	var beginDay;
+	if (preDay < firstDay){
+		beginDay = firstDay;
+	}
+	else{
+		beginDay = preDay;
+	}
+	var sum = 0;
+	var coun = 0;
+	for(var d = new Date(list[0].x); d >= beginDay; d.setDate(d.getDate()-1)){
+		var i = (d.getTime() - initDay.getTime()) / dayM;
+		var t = flag + '_' + geo;
+		sum += list[i][t];
+		coun++;
+	}
+	var test = document.getElementById("test");
+	addstring(test, "sum is " + sum);
+	newline(test);
+	addstring(test, "t is " + coun);
+	newline(test);
+	newLS.push({
+		"x" : list[0].x,
+		"y" : sum/t,
+	}); */
 	newLS.push(list[0]);
 	for(var i = step-1; i < list.length; i += step){
 		var sum = 0;
@@ -84,34 +115,13 @@ function getDisplayList(list){
 
 
 var TIMELS = convertList(timeData);
-var newLS1 = getTimeList(4013103604, TIMELS, 'C', 1, 24);
-var newLS2 = getTimeList(4013103604, TIMELS, 'R', 1, 24);
-newLS1 = getDisplayList(newLS1);
-newLS2 = getDisplayList(newLS2);
+
 /*var test = document.getElementById("test");
 for (var i = 0; i < newLS1.length; i++) {
 addstring(test, "len = " + newLS1.length);
 newline(test);
 }*/
 var palette = new Rickshaw.Color.Palette();
-
-var d1 = newLS1; //[{x:0, y: 10}, {x: 1, y: 20}, {x: 2, y:30}, {x: 3, y : 90}];
-var d2 = newLS2; //[{x:0, y:1},{x:1, y:2},{x:2, y:3}, {x:3, y: 5}];
-var min1 = d3.min(d1, function (d) {
-		return d.y;
-	});
-var max1 = d3.max(d1, function (d) {
-		return d.y;
-	});
-var min2 = d3.min(d2, function (d) {
-		return d.y;
-	});
-var max2 = d3.max(d2, function (d) {
-		return d.y;
-	});
-
-var linearScale1 = d3.scale.linear().domain([min1, max1]).range([0, 162]);
-var linearScale2 = d3.scale.linear().domain([min2, max2]).range([0, 162]);
 
 var graph = new Rickshaw.Graph({
 		element : document.querySelector("#chart"),
@@ -120,14 +130,12 @@ var graph = new Rickshaw.Graph({
 		renderer : 'line',
 		series : [{
 				name : "Crime",
-				data : d1,
+				data : [],
 				color : palette.color(),
-				scale : linearScale1,
 			}, {
 				name : "Review",
-				data : d2,
+				data : [],
 				color : palette.color(),
-				scale : linearScale2,
 			},
 		]
 	});
@@ -145,20 +153,20 @@ var x_axis = new Rickshaw.Graph.Axis.X({
 var y_axis = new Rickshaw.Graph.Axis.Y.Scaled({
 		graph : graph,
 		orientation : 'left',
-		scale : linearScale1,
 		tickFormat : function (d) {
 			return d / 200;
 		},
+		scale : d3.scale.linear().range([0, 162]),
 		element : document.getElementById('y_axis'),
 
 	});
 var y_axis1 = new Rickshaw.Graph.Axis.Y.Scaled({
 		graph : graph,
 		orientation : 'right',
-		scale : linearScale2,
 		tickFormat : function (d) {
 			return d / 200;
 		},
+		scale : d3.scale.linear().range([0, 162]),
 		element : document.getElementById('y_axis1'),
 
 	});
@@ -190,8 +198,8 @@ updateChart(4013103604, TIMELS, 1, 24);
 function updateChart(geoid, TIMELS, left, right) {
 	var crimeLS = getTimeList(geoid, TIMELS, 'C', left, right);
 	var rateLS = getTimeList(geoid, TIMELS, 'R', left, right);
-	crimeLS = getDisplayList(crimeLS);
-	rateLS = getDisplayList(rateLS);
+	crimeLS = getDisplayList(crimeLS, 'C');
+	rateLS = getDisplayList(rateLS, 'R');
 	var cmin = d3.min(crimeLS, function (d) {
 			return d.y;
 		});

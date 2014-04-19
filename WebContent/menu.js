@@ -229,8 +229,8 @@ $('#dataM').change(function () {
 				}
 			}
 			var n = 10;
-			this._div.innerHTML = '<h4>Number of Ratings over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
-					'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Ratings: </b>' + monthTotal
+			this._div.innerHTML = '<h4>Number of Reviews over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
+					'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Reviews: </b>' + monthTotal
 					 : 'Hover over a census tract');
 		};
 	}
@@ -402,8 +402,8 @@ $('#schemeM').change(function () {
 					}
 				}
 				var n = 10;
-				this._div.innerHTML = '<h4>Number of Ratings over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
-						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Ratings: </b>' + monthTotal
+				this._div.innerHTML = '<h4>Number of Reviews over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
+						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Reviews: </b>' + monthTotal
 						 : 'Hover over a census tract');
 			};
 		}
@@ -576,8 +576,8 @@ $('#schemeM').change(function () {
 					}
 				}
 				var n = 10;
-				this._div.innerHTML = '<h4>Number of Ratings over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
-						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Ratings: </b>' + monthTotal
+				this._div.innerHTML = '<h4>Number of Reviews over Month ' + left + ' to Month ' + right + '</h4>' + (props ?
+						'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Number of Reviews: </b>' + monthTotal
 						 : 'Hover over a census tract');
 			};
 		}

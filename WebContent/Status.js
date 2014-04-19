@@ -179,7 +179,7 @@ function getAveGrades(aveList){
 	Status.RAT.eint = equalInt(list);
 	Status.RAT.qint = quantInt(list);
 	
-	Status.RAT.med = list[list.length/2];
+	Status.RAT.med = list[Math.floor(list.length/2)];
 }
 
 function getAveInfo(start, end){
@@ -189,7 +189,7 @@ function getAveInfo(start, end){
 		sum += alist[i];
 	}
 	Status.RAT.total = sum;
-	Status.RAT.ave = 3.3;//sum / vCount(start, end);
+	Status.RAT.ave = sum / sCount('R_M', start, end);//vCount(start, end);
 	getAveGrades(alist);
 }
 
@@ -242,7 +242,7 @@ function getGrade(start, end) {
 		});
 
 	Status.CRM.total = calcTotal('C_M', start, end);
-	Status.CRM.ave = Status.CRM.total / sCount('C_M', start, end);
+	Status.CRM.ave = Status.CRM.total / len;//sCount('C_M', start, end);
 	Status.CRM.med = median(slist);
 	Status.CRM.eint = equalInt(slist);
 	Status.CRM.qint = quantInt(slist);
@@ -253,7 +253,7 @@ function getGrade(start, end) {
 		});
 
 	Status.VCR.total = calcTotal('VC_M', start, end);
-	Status.VCR.ave = Status.VCR.total / sCount('VC_M', start, end);
+	Status.VCR.ave = Status.VCR.total / len;//sCount('VC_M', start, end);
 	Status.VCR.med = median(slist);
 	Status.VCR.eint = equalInt(slist);
 	Status.VCR.qint = quantInt(slist);
@@ -264,7 +264,7 @@ function getGrade(start, end) {
 		});
 
 	Status.REV.total = calcTotal('R_M', start, end);
-	Status.REV.ave = Status.REV.total / sCount('R_M', start, end);
+	Status.REV.ave = Status.REV.total / len;//sCount('R_M', start, end);
 	Status.REV.med = median(slist);
 	Status.REV.eint = equalInt(slist);
 	Status.REV.qint = quantInt(slist);
@@ -275,7 +275,7 @@ function getGrade(start, end) {
 		});
 
 	Status.STR.total = calcTotal('S_M', start, end);
-	Status.STR.ave = Status.STR.total / sCount('S_M', start, end);
+	Status.STR.ave = Status.STR.total / len;//sCount('S_M', start, end);
 	Status.STR.med = median(slist);
 	Status.STR.eint = equalInt(slist);
 	Status.STR.qint = quantInt(slist);
@@ -314,7 +314,7 @@ function updateGrade(start, end) {
 		});
 
 	Status.CRM.total = calcTotal('C_M', start, end);
-	Status.CRM.ave = Status.CRM.total / sCount('C_M', start, end);
+	Status.CRM.ave = Status.CRM.total / len;//sCount('C_M', start, end);
 	Status.CRM.med = median(slist);
 	Status.CRM.eint = equalInt(slist);
 	Status.CRM.qint = quantInt(slist);
@@ -325,7 +325,7 @@ function updateGrade(start, end) {
 		});
 
 	Status.VCR.total = calcTotal('VC_M', start, end);
-	Status.VCR.ave = Status.VCR.total / sCount('VC_M', start, end);
+	Status.VCR.ave = Status.VCR.total / len;//sCount('VC_M', start, end);
 	Status.VCR.med = median(slist);
 	Status.VCR.eint = equalInt(slist);
 	Status.VCR.qint = quantInt(slist);
@@ -336,7 +336,7 @@ function updateGrade(start, end) {
 		});
 
 	Status.REV.total = calcTotal('R_M', start, end);
-	Status.REV.ave = Status.REV.total / sCount('R_M', start, end);
+	Status.REV.ave = Status.REV.total / len;//sCount('R_M', start, end);
 	Status.REV.med = median(slist);
 	Status.REV.eint = equalInt(slist);
 	Status.REV.qint = quantInt(slist);
@@ -347,7 +347,7 @@ function updateGrade(start, end) {
 		});
 
 	Status.STR.total = calcTotal('S_M', start, end);
-	Status.STR.ave = Status.STR.total / sCount('S_M', start, end);
+	Status.STR.ave = Status.STR.total / len;//sCount('S_M', start, end);
 	Status.STR.med = median(slist);
 	Status.STR.eint = equalInt(slist);
 	Status.STR.qint = quantInt(slist);
