@@ -120,7 +120,7 @@ function onTileClick(e) {
 		var right = $("#slider").slider("values", 1);
 		updateGeoid(geoid, left, right);
 		updateChart(geoid, TIMELS, left, right);
-		updateParaLines();
+		updateParaLines(left, right);
 		drawParallel("canvasParallel");
 	});
 	
