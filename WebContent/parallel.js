@@ -29,6 +29,11 @@
  */
 
 updateParaLines();
+//TEST
+paraAvgLine.STR = 3.3;
+
+Status.rateR.eint = [1,2,3,4,5,7,8];
+
 drawParallel("canvasParallel");
 
 function drawParallel(canvasName) {
