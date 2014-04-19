@@ -61,9 +61,12 @@ function addChernoff() {
 }
 
 function getScale(geoid) {
-	var pop = getPop(geoid);
-	var grade = 3*value2grade(pop, Status.POP.eint) / Status.POP.eint.length;
-	return grade;
+	var popu = getPop(geoid);
+	var pop = value2grade(popu, Status.POP.eint);
+	var zoom = map.getZoom();
+	var size = (0.5 + (pop - 1) * 0.5) * (zoom - 9.9);
+	//alert(pop + ", " + zoom + ", " + size);
+	return size;
 }
 
 // skin is the income, 1 to 10, 10 is the highest

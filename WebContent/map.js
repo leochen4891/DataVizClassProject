@@ -2,6 +2,18 @@ getGrade(1, 24);
 setMapGrades();
 var map = L.map('map').setView([33.60, -112.10], 10.1);
 
+map.on('zoomend', onZoomChange);
+
+function onZoomChange(e){
+	//$(function(){
+		//if( $('#setChernoffVisible').prop("checked") ){
+			//alert("checked");
+		
+			setChernoffVisible(false);
+			setChernoffVisible(true);
+		//}
+	//});
+}
 /*var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
 attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
 key: 'BC9A493B41014CAABB98F0471D759707',
@@ -104,7 +116,8 @@ function onTileClick(e) {
 	var popup = L.popup();
 	popup
 	.setLatLng(e.latlng)
-	.setContent("The Geo.ID for this census tract is " + geoid )
+	//.setContent("The Geo.ID for this census tract is " + geoid )
+	.setContent("The current zoom is " + map.getZoom())
 	.openOn(map);
 	
 	$(function(){
@@ -116,11 +129,13 @@ function onTileClick(e) {
 		drawParallel("canvasParallel");
 	});
 }
+
+
 function onEachFeature(feature, layer) {
 	layer.on({
 		mouseover : highlightFeature,
 		mouseout : resetHighlight,
-		click : onTileClick
+		click : onTileClick,
 	});
 }
 

@@ -85,7 +85,7 @@ function drawParallel(canvasName) {
 		// scale bar and numbers on vertical line
 		var intervals = Status[keys[i]].eint;
 		//alert(intervals);
-		var entryHeight = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) / (intervals.length - 1)
+		var entryHeight = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) / (intervals.length - 1);
 		var barWidth = 5;
 		for (var j = 0; j < intervals.length; j++) {
 
