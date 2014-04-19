@@ -300,7 +300,7 @@ function updateGrade(start, end) {
 	getAveInfo(start, end);
 }
 
-function updateParaLines() {
+function updateParaLines(start, end) {
     paraAvgLine.POP = Status.POP.ave;
     paraAvgLine.INC = Status.INC.ave;
     paraAvgLine.CRM = Status.CRM.ave;
@@ -316,12 +316,19 @@ function updateParaLines() {
     paraMedLine.RAT = Status.RAT.ave;
 
     if (null != geoid) {
-        paraGeoidLine.POP = getPop(parseInt(geoid));
-        paraGeoidLine.INC = getIncome(parseInt(geoid));
-        paraGeoidLine.CRM = getCrime(parseInt(geoid), start, end);
-        paraGeoidLine.VCR = getVioCrime(parseInt(geoid), start, end);
-        paraGeoidLine.REV = getReview(parseInt(geoid), start, end);
-        paraGeoidLine.RAT = getStar(parseInt(geoid), start, end);
+        paraGeoidLine.POP = getPop(Number(geoid));
+        paraGeoidLine.INC = getIncome(Number(geoid));
+        paraGeoidLine.CRM = getCrime(Number(geoid), start, end);
+       
+        paraGeoidLine.VCR = getVioCrime(Number(geoid), start, end);
+        paraGeoidLine.REV = getReview(Number(geoid), start, end);
+        paraGeoidLine.RAT = getAveRating(Number(geoid), start, end);
+        /* TEST 
+        var tempStr = 'average rating = ' + paraGeoidLine.RAT;
+        $(function(){
+        	$('#test').html(tempStr);
+        });
+        /* END */
     }
 }
 

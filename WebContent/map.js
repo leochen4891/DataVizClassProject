@@ -27,7 +27,6 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-	var n = 10;
 	this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 			'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 			'<br /><b>Income: </b> $' + props.Income
@@ -121,7 +120,7 @@ function onTileClick(e) {
 		var right = $("#slider").slider("values", 1);
 		updateGeoid(geoid, left, right);
 		updateChart(geoid, TIMELS, left, right);
-		updateParaLines();
+		updateParaLines(left, right);
 		drawParallel("canvasParallel");
 	});
 	
