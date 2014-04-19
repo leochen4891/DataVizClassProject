@@ -104,7 +104,7 @@ function onTileClick(e) {
 	var popup = L.popup();
 	popup
 	.setLatLng(e.latlng)
-	.setContent("The Geo.ID for this census tract is " + geoid )
+	.setContent(geoid)
 	.openOn(map);
 	
 	$(function(){
@@ -115,6 +115,13 @@ function onTileClick(e) {
 		updateParaLines();
 		drawParallel("canvasParallel");
 	});
+	console.log("geoid = " + geoid);
+	
+	//update mosaic
+	
+	updateBusiList();
+	drawMosaic();
+	
 }
 function onEachFeature(feature, layer) {
 	layer.on({

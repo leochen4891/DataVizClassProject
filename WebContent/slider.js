@@ -4,7 +4,7 @@
 		range : true,
 		min : 1,
 		max : 24,
-		values : [1, 24],
+		values : [2, 5],
 		slide : function (event, ui) {
 			
             // should always update Status

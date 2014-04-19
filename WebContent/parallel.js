@@ -30,9 +30,7 @@
 
 updateParaLines();
 
-alert("mark0");
 drawParallel("canvasParallel");
-alert("mark1");
 
 function drawParallel(canvasName) {
     // prepare the 3 lines, avg, med, and target

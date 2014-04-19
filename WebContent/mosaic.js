@@ -39,6 +39,60 @@ busiList[3].stars[2] = 4;
 busiList[3].stars[3] = 5;
 busiList[3].stars[4] = 1;
 
+// from geoid to get top 5 most reviewed business id
+function updateBusiList() {
+	//console.log("------------------- update top 5 busi list ----------------------");
+	var gid = Number(geoid);
+	for (var i = 0; i < 5; i++) {
+		busiList[i] = new Object;
+		busiList[i].id = "";
+		busiList[i].name = "";
+		busiList[i].stars = new Array();
+		busiList[i].stars[0] = 0;
+		busiList[i].stars[1] = 0;
+		busiList[i].stars[2] = 0;
+		busiList[i].stars[3] = 0;
+		busiList[i].stars[4] = 0;
+	}
+
+	if (null != top5busiList[gid]) {
+		for (var i = 0; i < 5; i++) {
+			try {
+				var busiid = top5busiList[gid][i];
+				busiList[i].id = busiid;
+				//console.log("id " + i + ":" + busiid);
+				busiList[i].name = busiStarsList[busiid][0];
+				//console.log("name " + i + ":" + busiList[i].name);
+				busiList[i].stars = new Array();
+				var start;
+				var end;
+				$(function(){
+					start = $('#slider').slider("values", 0);
+					end = $('#slider').slider("values", 1);
+				});
+				var stars = getStars(busiid, start, end);
+				busiList[i].stars = stars;
+			} catch (err) {
+				//console.log("i = " + i);
+			}
+		}
+	}
+}
+
+function getStars(busiid, start, end) {
+	var STARS_OFFSET = 1;
+	var starsCount = [0,0,0,0,0];
+
+	for (var mon = start; mon <= end; mon++) {
+		var str = busiStarsList[busiid][STARS_OFFSET + mon];
+		var temp = str.split("_");
+		for (var i = 0; i < temp.length; i++) {
+			starsCount[i] = starsCount[i] + Number(temp[i]);
+		}
+	}
+	return starsCount;
+}
+
 //
 
 var mosaicEntryHeight;
@@ -101,13 +155,14 @@ function drawMosaic() {
 			ctx.fillStyle = STAR_COL[c];
 			var offsetX = WIDTH * (leftSide / total);
 			var width = WIDTH * busiList[r].stars[c] / total;
-			//alert((posX + offsetX) + ", " + posY + ", " + width + ", " + (mosaicEntryHeight - 1));
+			// alert((posX + offsetX) + ", " + posY + ", " + width + ", " +
+			// (mosaicEntryHeight - 1));
 			ctx.fillRect(posX + offsetX, posY, width, mosaicEntryHeight - 1);
 			ctx.fill();
 			leftSide += busiList[r].stars[c];
 		}
 
-		//alert("r = " + r + ", index = " + mosaicIndex);
+		// alert("r = " + r + ", index = " + mosaicIndex);
 		if (r == mosaicIndex) {
 			ctx.fillStyle = "red";
 			ctx.font = 1.2 * fontHeight + "px Arial";
@@ -119,8 +174,7 @@ function drawMosaic() {
 			ctx.fillText(busiList[r].name, 10, (r + 0.5) * mosaicEntryHeight
 					+ fontHeight / 2);
 		}
-		
-		
+
 		ctx.fill();
 	}
 }

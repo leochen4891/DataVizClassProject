@@ -60,10 +60,37 @@ function addChernoff() {
 	}
 }
 
+var sizeTable = new Array();
+sizeTable[1] = [1,2,3,4,5,6,7];
+sizeTable[2] = [1,2,3,4,5,6,7];
+sizeTable[3] = [1,2,3,4,5,6,7];
+sizeTable[4] = [1,2,3,4,5,6,7];
+sizeTable[5] = [1,2,3,4,5,6,7];
+sizeTable[6] = [1,2,3,4,5,6,7];
+sizeTable[7] = [1,2,3,4,5,6,7];
+sizeTable[8] = [1,2,3,4,5,6,7];
+sizeTable[9] = [0.1,0.2,0.3,0.4,0.5,0.6,0.7];
+sizeTable[10] = [0.2,0.5,1.0,1.5,2.2,3.5, 4.4];
+sizeTable[11] = [1,2,3,4,5,6,7];
+sizeTable[12] = [1,2,3,4,5,6,7];
+sizeTable[13] = [1,2,3,4,5,6,7];
+sizeTable[14] = [1,2,3,4,5,6,7];
+sizeTable[15] = [1,2,3,4,5,6,7];
+sizeTable[16] = [1,2,3,4,5,6,7];
+sizeTable[17] = [1,2,3,4,5,6,7];
+sizeTable[18] = [1,2,3,4,5,6,7];
+
+function getSizeByPopZoom(pop, zoom) {
+	return sizeTable[zoom][pop];
+}
+
 function getScale(geoid) {
-	var pop = getPop(geoid);
-	var grade = 3*value2grade(pop, Status.POP.eint) / Status.POP.eint.length;
-	return grade;
+	var population = getPop(geoid);
+	var pop = value2grade(population, Status.POP.eint);
+	var zoom = Math.floor(map.getZoom());
+	var size = getSizeByPopZoom(pop, zoom);
+	console.log("pop = " + pop + ", zoom = " + zoom + ", size = " + size);
+	return size;
 }
 
 // skin is the income, 1 to 10, 10 is the highest
