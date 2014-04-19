@@ -114,10 +114,9 @@ function findTop20(s1, monthStart, monthEnd) {
 	//var length = stopIndex - startIndex;
 	//document.write(length);
 
-	var i = startIndex;
-	for (i = startIndex; i <= stopIndex; i++) {
+	for (var i = startIndex; i <= stopIndex; i++) {
 
-		var m = s1[i];
+		var m = s1[i - 1];
 		var singleWord = m.split(";");
 		var length1 = singleWord.length;
 		length1 = length1 - 1;
