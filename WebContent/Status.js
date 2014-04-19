@@ -11,6 +11,9 @@ var geoid;
 var start;
 var end;
 
+var mosaicIndex = 0;
+var busiid;
+
 var paraLines = new Array();
 var paraAvgLine = new Object();
 paraAvgLine.COL = "#FF0000";

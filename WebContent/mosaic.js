@@ -1,46 +1,72 @@
-var busi = new Array();
-busi[0] = new Object;
-busi[0].name = "PandaExpress";
-busi[0].stars = new Array();
-busi[0].stars[0] = 5;
-busi[0].stars[1] = 8;
-busi[0].stars[2] = 9;
-busi[0].stars[3] = 15;
-busi[0].stars[4] = 8;
-busi[0].id
+var busiList = new Array();
+busiList[0] = new Object;
+busiList[0].id = "panda-express";
+busiList[0].name = "PandaExpress";
+busiList[0].stars = new Array();
+busiList[0].stars[0] = 5;
+busiList[0].stars[1] = 8;
+busiList[0].stars[2] = 9;
+busiList[0].stars[3] = 15;
+busiList[0].stars[4] = 8;
 
-busi[1] = new Object;
-busi[1].name = "Jack in the box";
-busi[1].stars = new Array();
-busi[1].stars[0] = 8;
-busi[1].stars[1] = 9;
-busi[1].stars[2] = 14;
-busi[1].stars[3] = 5;
-busi[1].stars[4] = 1;
+busiList[1] = new Object;
+busiList[1].id = "jack-in-the-box";
+busiList[1].name = "Jack in the box";
+busiList[1].stars = new Array();
+busiList[1].stars[0] = 8;
+busiList[1].stars[1] = 9;
+busiList[1].stars[2] = 14;
+busiList[1].stars[3] = 5;
+busiList[1].stars[4] = 1;
 
-busi[2] = new Object;
-busi[2].name = "KFC at mill";
-busi[2].stars = new Array();
-busi[2].stars[0] = 2;
-busi[2].stars[1] = 1;
-busi[2].stars[2] = 4;
-busi[2].stars[3] = 5;
-busi[2].stars[4] = 1;
+busiList[2] = new Object;
+busiList[2].id = "kfc-at-mill";
+busiList[2].name = "KFC at mill";
+busiList[2].stars = new Array();
+busiList[2].stars[0] = 2;
+busiList[2].stars[1] = 1;
+busiList[2].stars[2] = 4;
+busiList[2].stars[3] = 5;
+busiList[2].stars[4] = 1;
 
-busi[3] = new Object;
-busi[3].name = "CVS at apache";
-busi[3].stars = new Array();
-busi[3].stars[0] = 2;
-busi[3].stars[1] = 1;
-busi[3].stars[2] = 4;
-busi[3].stars[3] = 5;
-busi[3].stars[4] = 1;
+busiList[3] = new Object;
+busiList[3].id = "cvs-at-apache";
+busiList[3].name = "CVS at apache";
+busiList[3].stars = new Array();
+busiList[3].stars[0] = 2;
+busiList[3].stars[1] = 1;
+busiList[3].stars[2] = 4;
+busiList[3].stars[3] = 5;
+busiList[3].stars[4] = 1;
 
-drawMosaic("canvasMosaic", busi);
+//
 
-function drawMosaic(canvasName, busiList) {
-	var c = document.getElementById(canvasName);
-	var ctx = c.getContext("2d");
+var mosaicEntryHeight;
+drawMosaic();
+
+document.getElementById("canvasMosaic").addEventListener('mousedown',
+		mouseDownHandler, false);
+
+function mouseDownHandler(event) {
+	var canvas = document.getElementById("canvasMosaic");
+	var mousePos = getMousePos(canvas, event);
+	mosaicIndex = (Math.floor((mousePos.y / mosaicEntryHeight)));
+	busiid = busiList[mosaicIndex].id;
+	drawMosaic();
+};
+
+function getMousePos(canvas, evt) {
+	var rect = canvas.getBoundingClientRect();
+	return {
+		x : evt.clientX - rect.left,
+		y : evt.clientY - rect.top
+	};
+}
+
+function drawMosaic() {
+	var canvas = document.getElementById("canvasMosaic");
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	var STAR_COL = new Array();
 	STAR_COL[0] = "#F0F0FF";
@@ -55,12 +81,12 @@ function drawMosaic(canvasName, busiList) {
 	var FONT_HEIGHT_MAX = 22;
 
 	var count = Math.min(COUNT_MAX, busiList.length);
-	var entryHeight = HEIGHT / count;
-	var fontHeight = Math.min(FONT_HEIGHT_MAX, entryHeight * 0.8)
+	mosaicEntryHeight = HEIGHT / count;
+	var fontHeight = Math.min(FONT_HEIGHT_MAX, mosaicEntryHeight * 0.8);
 
 	for (var r = 0; r < count; r++) {
 		var posX = 0;
-		var posY = r * entryHeight;
+		var posY = r * mosaicEntryHeight;
 
 		if (r == 1)
 			ctx.fillStyle = "red";
@@ -75,16 +101,26 @@ function drawMosaic(canvasName, busiList) {
 			ctx.fillStyle = STAR_COL[c];
 			var offsetX = WIDTH * (leftSide / total);
 			var width = WIDTH * busiList[r].stars[c] / total;
-			ctx.fillRect(posX + offsetX, posY, width, entryHeight - 1);
+			//alert((posX + offsetX) + ", " + posY + ", " + width + ", " + (mosaicEntryHeight - 1));
+			ctx.fillRect(posX + offsetX, posY, width, mosaicEntryHeight - 1);
 			ctx.fill();
 			leftSide += busiList[r].stars[c];
 		}
 
-		ctx.fillStyle = "black";
-		ctx.font = fontHeight + "px Arial";
-		ctx.fillText(busiList[r].name, 10, (r + 0.5) * entryHeight + fontHeight
-				/ 2);
-		ctx.stroke();
+		//alert("r = " + r + ", index = " + mosaicIndex);
+		if (r == mosaicIndex) {
+			ctx.fillStyle = "red";
+			ctx.font = 1.2 * fontHeight + "px Arial";
+			ctx.fillText(busiList[r].name, 15, (r + 0.5) * mosaicEntryHeight
+					+ fontHeight / 2);
+		} else {
+			ctx.fillStyle = "black";
+			ctx.font = fontHeight + "px Arial";
+			ctx.fillText(busiList[r].name, 10, (r + 0.5) * mosaicEntryHeight
+					+ fontHeight / 2);
+		}
+		
+		
 		ctx.fill();
 	}
 }

@@ -29,6 +29,11 @@
  */
 
 updateParaLines();
+//TEST
+paraAvgLine.STR = 3.3;
+
+Status.rateR.eint = [1,2,3,4,5,7,8];
+
 drawParallel("canvasParallel");
 
 function drawParallel(canvasName) {
@@ -105,7 +110,7 @@ function drawParallel(canvasName) {
 
 	// draw data lines
 	//for (var i = 0; i < paraLines.length; i++) {
-        var i = 1;
+        var i = 0;
 	    var keys = Object.keys(paraLines[i]);
         //alert(paraLines[i]);
 	    ctx.strokeStyle = paraLines[i].COL;
