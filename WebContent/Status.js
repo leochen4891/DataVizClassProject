@@ -78,13 +78,13 @@ var Status = {
 		"eint" : [],
 		"qint" : []
 	},
-	STR: {
+	/*STR: {
 		"total" : 0,
 		"ave" : 0,
 		"med" : 0,
 		"eint" : [],
 		"qint" : []
-	}
+	}*/
 };
 function calcTotal(flag, start, end) {
 	var c = tractData.features;
@@ -153,10 +153,23 @@ function sumList(flag, start, end) {
 	return list;
 }
 
+function aveSumList(flag, start, end){
+	var c = tractData.features;
+	var list = [];
+	for (var i = 0; i < c.length; i++) {
+		var sum = 0;
+		for (var j = start; j <= end; j++) {
+			sum = sum + c[i].properties[flag + j] * Math.random();
+		}
+		list.push(sum);		
+	}
+	return list;
+}	
+
 function getAveList(start, end){
 	var nList = sumList('R_M', start, end);
 	//alert(nList);
-	var rList = sumList('S_M', start, end);
+	var rList = aveSumList('S_M', start, end);
 	//alert(rList);
 	var aveList = [];
 	for (var i = 0; i < nList.length; i++){
@@ -269,7 +282,7 @@ function getGrade(start, end) {
 	Status.REV.eint = equalInt(slist);
 	Status.REV.qint = quantInt(slist);
 
-	list = sumList('S_M', start, end);
+	/*list = sumList('S_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
@@ -283,7 +296,7 @@ function getGrade(start, end) {
 	list = totList('Population');
 	slist = list.sort(function (a, b) {
 			return a - b;
-		});
+		});*/
 
 	Status.POP.total = total('Population');
 	Status.POP.ave = Status.POP.total / len;
@@ -341,7 +354,7 @@ function updateGrade(start, end) {
 	Status.REV.eint = equalInt(slist);
 	Status.REV.qint = quantInt(slist);
 
-	list = sumList('S_M', start, end);
+	/*list = sumList('S_M', start, end);
 	slist = list.sort(function (a, b) {
 			return a - b;
 		});
@@ -350,7 +363,7 @@ function updateGrade(start, end) {
 	Status.STR.ave = Status.STR.total / len;//sCount('S_M', start, end);
 	Status.STR.med = median(slist);
 	Status.STR.eint = equalInt(slist);
-	Status.STR.qint = quantInt(slist);
+	Status.STR.qint = quantInt(slist);*/
 	
 	getAveInfo(start, end);
 }
@@ -361,14 +374,14 @@ function updateParaLines() {
     paraAvgLine.CRM = Status.CRM.ave;
     paraAvgLine.VCR = Status.VCR.ave;
     paraAvgLine.REV = Status.REV.ave;
-    paraAvgLine.STR = Status.STR.ave;
+    paraAvgLine.RAT = Status.RAT.ave;
     
     paraMedLine.POP = Status.POP.ave;
     paraMedLine.INC = Status.INC.ave;
     paraMedLine.CRM = Status.CRM.ave;
     paraMedLine.VCR = Status.VCR.ave;
     paraMedLine.REV = Status.REV.ave;
-    paraMedLine.STR = Status.STR.ave;
+    paraMedLine.RAT = Status.RAT.ave;
 
     if (null != geoid) {
         paraGeoidLine.POP = getPop(parseInt(geoid));
@@ -376,7 +389,7 @@ function updateParaLines() {
         paraGeoidLine.CRM = getCrime(parseInt(geoid), start, end);
         paraGeoidLine.VCR = getVioCrime(parseInt(geoid), start, end);
         paraGeoidLine.REV = getReview(parseInt(geoid), start, end);
-        paraGeoidLine.STR = getStar(parseInt(geoid), start, end);
+        paraGeoidLine.RAT = getStar(parseInt(geoid), start, end);
     }
 }
 

@@ -63,7 +63,7 @@ function drawParallel(canvasName) {
 	// draw each axis
 	var keys = Object.keys(Status);
 	//alert(keys);
-	for (var i = 0; i < keys.length-1; i++) {
+	for (var i = 0; i < keys.length; i++) {
 		var entryCount = keys.length;
 		var entryWidth = (WIDTH - MARGIN_LEFT - MARGIN_RIGHT)
 				/ (entryCount - 1);
@@ -120,11 +120,15 @@ function drawParallel(canvasName) {
 	    	var value = paraLines[i][keys[j+1]];
 	    	var max = intervals[intervals.length - 1];
 	    	var min = intervals[0];
+	    	var temp = (value - min) / (max - min);
 	    	var offset = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT)
-	    			* ((value - min) / (max - min));
+	    			* (temp);
 	    	var posX = MARGIN_LEFT + entryWidth * j;
 	    	var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT - offset;
 
+	    	/*if (j == 5) {
+	    		alert(keys[j+1]);
+	    	}*/
 	    	if (j == 0) {
 	    		ctx.moveTo(posX, posY);
 	    	} else {
