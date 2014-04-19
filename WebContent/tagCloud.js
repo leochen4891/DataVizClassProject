@@ -1,26 +1,37 @@
-var h = new HashTable();
-var s1 = WorkCountTable["juba-restaurant-phoenix"];
+var tagHash;// = new HashTable();
+var top20Words// = new Array();
+var fill;// = d3.scale.category20();
 
-var monthStart = 0;
-var monthEnd = 23;
+function drawTagCloud() {
+	var start;
+	var end;
+	$(function() {
+		start = $('#slider').slider("values", 0);
+		end = $('#slider').slider("values", 1);
+	});
 
-var top20Words = new Array();
-top20Words = findTop20(s1, monthStart, monthEnd);
+	//var s1 = WorkCountTable["juba-restaurant-phoenix"];
+	var s1 = WorkCountTable[busiid];
+	
+	tagHash = new HashTable();
+	top20Words = new Array();
+	top20Words = findTop20(s1, start, end);
+	fill = d3.scale.category20();
 
-var fill = d3.scale.category20();
-var arrayWords = new Array();
-arrayWords = top20Words;
-var canvas = d3.select("p").append("arrayWords");
-d3.layout.cloud().size([ 400, 224 ]).words(arrayWords.map(function(d) {
-	return {
-		text : d,
-		size : 12 + Math.random() * 20
-	};
-})).padding(5).rotate(function() {
-	return ~~(Math.random() * 2) * 90;
-}).font("Impact").fontSize(function(d) {
-	return d.size;
-}).on("end", draw).start();
+	var arrayWords = new Array();
+	arrayWords = top20Words;
+	var canvas = d3.select("p").html("");
+	d3.layout.cloud().size([ 400, 224 ]).words(arrayWords.map(function(d) {
+		return {
+			text : d,
+			size : 12 + Math.random() * 20
+		};
+	})).padding(5).rotate(function() {
+		return ~~(Math.random() * 2) * 90;
+	}).font("Impact").fontSize(function(d) {
+		return d.size;
+	}).on("end", draw).start();
+}
 
 function HashTable(obj) {
 	this.length = 0;
@@ -118,23 +129,23 @@ function findTop20(s1, monthStart, monthEnd) {
 
 	var l = words.length;
 	//for (i = 0; i < l; i++) {
-		//document.write(words[i]+"<br/>");
+	//document.write(words[i]+"<br/>");
 	//}
 
 	for (var r = 0; r < l; r++) {
 
 		var eachWord = words[r].split("_");
-		if (h.hasItem(eachWord[0])) {
-			var k = h.getItem(eachWord[0]);
-			h.removeItem(eachWord[0]);
-			h.setItem(eachWord[0], parseInt(eachWord[1]) + parseInt(k));
+		if (tagHash.hasItem(eachWord[0])) {
+			var k = tagHash.getItem(eachWord[0]);
+			tagHash.removeItem(eachWord[0]);
+			tagHash.setItem(eachWord[0], parseInt(eachWord[1]) + parseInt(k));
 		} else {
-			h.setItem(eachWord[0], eachWord[1]);
+			tagHash.setItem(eachWord[0], eachWord[1]);
 		}
 
 	}
-	//document.write(h.keys()+"<br/>");
-	//document.write(h.values()+"<br/>");
+	//document.write(tagHash.keys()+"<br/>");
+	//document.write(tagHash.values()+"<br/>");
 
 	//sorting the hash table and returning top 20 words
 	var counts = new Array();
@@ -142,8 +153,8 @@ function findTop20(s1, monthStart, monthEnd) {
 	var temp = 0;
 	var tempWord = "";
 	//var max = 0;
-	wordsArray = h.keys();
-	counts = h.values();
+	wordsArray = tagHash.keys();
+	counts = tagHash.values();
 	//document.write(counts.length);
 
 	for (i = 0; i < counts.length - 1; i++) {
@@ -169,15 +180,13 @@ function findTop20(s1, monthStart, monthEnd) {
 }
 
 function draw(words) {
-	d3.select("p").append("svg").attr("width", 400).attr("height", 225)
-			.append("g").attr("transform", "translate(185,110)").selectAll(
-					"text").data(words).enter().append("text").style(
-					"font-size", function(d) {
-						return d.size + "px";
-					}).style("font-family", "Impact").style("fill",
-					function(d, i) {
-						return fill(i);
-					}).attr("text-anchor", "middle").attr(
+	d3.select("p").append("svg").attr("width", 400).attr("height", 225).append(
+			"g").attr("transform", "translate(185,110)").selectAll("text")
+			.data(words).enter().append("text").style("font-size", function(d) {
+				return d.size + "px";
+			}).style("font-family", "Impact").style("fill", function(d, i) {
+				return fill(i);
+			}).attr("text-anchor", "middle").attr(
 					"transform",
 					function(d) {
 						return "translate(" + [ d.x, d.y ] + ")rotate("
