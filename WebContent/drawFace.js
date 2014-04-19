@@ -69,16 +69,17 @@ sizeTable[5] = [1,2,3,4,5,6,7];
 sizeTable[6] = [1,2,3,4,5,6,7];
 sizeTable[7] = [1,2,3,4,5,6,7];
 sizeTable[8] = [1,2,3,4,5,6,7];
-sizeTable[9] = [0.1,0.2,0.3,0.4,0.5,0.6,0.7];
-sizeTable[10] = [0.2,0.5,1.0,1.5,2.2,3.5, 4.4];
-sizeTable[11] = [1,2,3,4,5,6,7];
-sizeTable[12] = [1,2,3,4,5,6,7];
-sizeTable[13] = [1,2,3,4,5,6,7];
-sizeTable[14] = [1,2,3,4,5,6,7];
-sizeTable[15] = [1,2,3,4,5,6,7];
-sizeTable[16] = [1,2,3,4,5,6,7];
-sizeTable[17] = [1,2,3,4,5,6,7];
-sizeTable[18] = [1,2,3,4,5,6,7];
+sizeTable[9] = [0.054,0.144,0.306,0.410,0.531,0.576,0.801];
+sizeTable[10] = [0.06,0.16,0.34,0.455,0.59,0.64,0.89];
+sizeTable[11] = [0.066,0.176,0.374,0.5,0.649,0.704,0.979];  //1.1
+sizeTable[12] = [0.072,0.192,0.408,0.546,0.708,0.768,1.068];   //1.2
+sizeTable[13] = [0.078,0.208,0.442,0.592,0.767,0.832,1.157];   //1.3
+sizeTable[14] = [0.084,0.224,0.467,0.637,0.826,0.9,1.3];   //1.4
+sizeTable[15] = [0.09,0.3,0.544,0.728,0.944,1.1,1.6];   //1.6
+sizeTable[16] = [0.14,0.5,0.64,0.774,1.003,1.3,1.7];   //1.7
+sizeTable[17] = [0.18,0.7,0.77,0.88,1.3,1.5,1.9];   //1.8
+sizeTable[18] = [0,2,0.9,0.88,0.91,1.6,1.7,2];   //2.0
+
 
 function getSizeByPopZoom(pop, zoom) {
 	return sizeTable[zoom][pop];
@@ -92,7 +93,6 @@ function getScale(geoid) {
 	console.log("pop = " + pop + ", zoom = " + zoom + ", size = " + size);
 	return size;
 }
-
 // skin is the income, 1 to 10, 10 is the highest
 function getSkin(geoid) {
 	var currentIncome = getIncome(geoid);
