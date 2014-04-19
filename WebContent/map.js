@@ -27,7 +27,6 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-	var n = 10;
 	this._div.innerHTML = '<h4>Phoenix Population</h4>' + (props ?
 			'<b>' + 'Census Tract# ' + props.NAME + '</b><br /><b>Population: </b>' + props.Population + ' people' +
 			'<br /><b>Income: </b> $' + props.Income

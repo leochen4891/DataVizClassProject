@@ -232,8 +232,8 @@ function updateChart(geoid, TIMELS, left, right) {
 	});
 	start = new Date(start);
 	end = new Date(end);
-	var startStr = d3.time.format("%m/%d/%y")(start);
-	var endStr = d3.time.format("%m/%d/%y")(end);
+	var startStr = d3.time.format("%b/%y")(start);
+	var endStr = d3.time.format("%b/%y")(end);
 	$(function(){
 		$("#startTime").html(startStr);
 		$("#endTime").html(endStr);
