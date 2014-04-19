@@ -21,7 +21,7 @@
 			addstring(test, testStr);
 			newline(test);
 			  end */
-			updateParaLines();
+			updateParaLines(start, end);
 			drawParallel("canvasParallel");
 			if ($('#dataM').val() == 'crime') {
 				if (!$('#chk1').prop("checked")) {

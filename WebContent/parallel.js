@@ -28,7 +28,7 @@
  selectedGEOIDs[2].COL = "#0000FF";
  */
 
-updateParaLines();
+updateParaLines(1, 24);
 
 drawParallel("canvasParallel");
 
