@@ -35,7 +35,7 @@
 }
 #y_axis1 {
 	float: right;
-	width: 50px;
+	width: 70px;
 	/*height: 10px*/
 }
 #x_axis{
@@ -53,7 +53,7 @@
 	width : 55px;
 	height : 15px;
 	color : red;
-	background-color : white;
+	background-color: #E5E5E5
 }
 #endTime{
 	position : absolute;
@@ -62,5 +62,5 @@
 	width : 55px;
 	height : 15px;
 	color : green;
-	background-color : white;
+	background-color: #E5E5E5
 }

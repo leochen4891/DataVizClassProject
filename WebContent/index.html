@@ -26,7 +26,6 @@
 <link rel="stylesheet" href="lib/rickshaw.min.css" />
 <link rel="stylesheet" href="menu.css" />
 <link rel="stylesheet" href="map.css" />
-<link rel="stylesheet" href="slider.css" />
 <link rel="stylesheet" href="timechart.css" />
 <link rel="stylesheet" href="parallel.css" />
 <script src="dat/GEOIDTable.js"></script>
@@ -48,12 +47,12 @@
 	left: 8px;
 	top: 30px;
 	width: 600px;
-	height: 480px;
+	height: 450px;
 }
 
 #slider {
 	position: absolute;
-	left: 16px;
+	left: 20px;
 	top: 520px;
 	width: 570px;
 }
@@ -64,7 +63,7 @@
 	top: 548px;
 	width: 600px;
 	height: 215px;
-	background-color: "grey";
+	background-color: #E5E5E5;
 }
 
 #canvasParallel {
@@ -84,6 +83,28 @@
 	width: 340px;
 	height: 33px;
 }
+#sliderScale{
+	position: absolute;
+	left: 8px;
+	top: 490px;
+	width: 600px;
+	height: 20px;
+}
+#timechartlegendCrime{
+	position: absolute;
+	left: 8px;
+	top: 558px;
+	width: 49px;
+	height: 12px;
+}
+#timechartlegendReview{
+	position: absolute;
+	left: 548px;
+	top: 558px;
+	width: 56;
+	height: 12px;
+}
+
 
 #canvasMosaic {
 	position: absolute;
@@ -159,6 +180,9 @@
 
 		<canvas id="canvasParallel" class="canvasParallel" width="400" height="240" style="border: 1px solid #d1d1d1;">error</canvas>
 		<img id="parasymbols" src="img/parallelBottomLegend.bmp" width="340" height="33"></img>
+		<img id="timechartlegendReview" src="img/timeChartLegendReview.bmp" width="56" height="12"></img>
+		<img id="timechartlegendCrime" src="img/timeChartLegendCrime.bmp" width="49" height="12"></img>
+		<img id="sliderScale" src="img/sliderScale.bmp" width="600" height="20"></img>
 		<canvas id="canvasMosaic" width="400" height="240" style="border: 1px solid #d3d3d3;"></canvas>
 		<p id="tagCloud"></p>
 

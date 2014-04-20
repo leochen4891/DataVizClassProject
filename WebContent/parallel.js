@@ -93,6 +93,7 @@ function drawParallel(canvasName) {
 		}
 		// scale number
 		ctx.font = FONT_HEIGHT * 0.8 + "px Arial";
+		ctx.fillStyle = "black";
 		ctx.fillText(intervals[0], posX + barWidth + 2, posY - FONT_HEIGHT * 0.2);
 		ctx.stroke();
 		ctx.fill();

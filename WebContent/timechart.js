@@ -125,7 +125,7 @@ var palette = new Rickshaw.Color.Palette();
 
 var graph = new Rickshaw.Graph({
 		element : document.querySelector("#chart"),
-		width : 500,
+		width : 480,
 		height : 162,
 		renderer : 'line',
 		series : [{
