@@ -125,7 +125,7 @@ var palette = new Rickshaw.Color.Palette();
 
 var graph = new Rickshaw.Graph({
 		element : document.querySelector("#chart"),
-		width : 500,
+		width : 480,
 		height : 162,
 		renderer : 'line',
 		series : [{
@@ -171,10 +171,10 @@ var y_axis1 = new Rickshaw.Graph.Axis.Y.Scaled({
 
 	});
 
-var timeLegend = new Rickshaw.Graph.Legend({
+/*var timeLegend = new Rickshaw.Graph.Legend({
 		element : document.querySelector('#timeLegend'),
 		graph : graph
-	});
+	}); */
 /*
 var offsetForm = document.getElementById('offset_form');
 
