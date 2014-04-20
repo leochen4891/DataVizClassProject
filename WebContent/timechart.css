@@ -11,15 +11,16 @@
 	float: left;
 }
 
-#timeLegend {
+/* #timeLegend {
 	position: absolute;
-	left: 535px;
+	/*left: 535px;*/
+	left: 0px;
 	top: 0px;
 	right: 0px;
 	height: 15px;
 	background-color: transparent;
 	color: black;
-}
+} */
 
 
 #offset_form {
