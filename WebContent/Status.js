@@ -16,10 +16,13 @@ var busiid;
 
 var paraLines = new Array();
 var paraAvgLine = new Object();
+paraAvgLine.NAM = "avg";
 paraAvgLine.COL = "#FF0000";
 var paraMedLine = new Object();
-paraMedLine.COL = "#00FF00";
+paraMedLine.NAM = "med";
+paraMedLine.COL = "#00A226";
 var paraGeoidLine = new Object();
+paraGeoidLine.NAM = "cur";
 paraGeoidLine.COL = "#000000";
 
 paraLines[0] = paraAvgLine;
@@ -140,11 +143,14 @@ function sumList(flag, start, end) {
 	var c = tractData.features;
 	var list = [];
 	for (var i = 0; i < c.length; i++) {
-		var sum = 0;
-		for (var j = start; j <= end; j++) {
-			sum = sum + c[i].properties[flag + j];
-		}
-		list.push(sum);
+
+		
+			var sum = 0;
+			for (var j = start; j <= end; j++) {
+				sum = sum + c[i].properties[flag + j];
+			}
+			list.push(sum);
+		
 	}
 	return list;
 }
@@ -166,6 +172,7 @@ function getAveList(start, end){
 	var nList = sumList('R_M', start, end);
 	//alert(nList);
 	var rList = aveSumList('S_M', start, end);
+	console.log("rList = " + rList);
 	//alert(rList);
 	var aveList = [];
 	for (var i = 0; i < nList.length; i++){

@@ -125,7 +125,7 @@ var palette = new Rickshaw.Color.Palette();
 
 var graph = new Rickshaw.Graph({
 		element : document.querySelector("#chart"),
-		width : 500,
+		width : 480,
 		height : 162,
 		renderer : 'line',
 		series : [{
@@ -171,10 +171,10 @@ var y_axis1 = new Rickshaw.Graph.Axis.Y.Scaled({
 
 	});
 
-var timeLegend = new Rickshaw.Graph.Legend({
+/*var timeLegend = new Rickshaw.Graph.Legend({
 		element : document.querySelector('#timeLegend'),
 		graph : graph
-	});
+	}); */
 /*
 var offsetForm = document.getElementById('offset_form');
 
@@ -194,7 +194,7 @@ graph.render();
  */
 graph.render();
 
-updateChart(4013103604, TIMELS, 1, 24);
+updateChart(geoid, TIMELS, 1, 24);
 function updateChart(geoid, TIMELS, left, right) {
 	var crimeLS = getTimeList(geoid, TIMELS, 'C', left, right);
 	var rateLS = getTimeList(geoid, TIMELS, 'R', left, right);

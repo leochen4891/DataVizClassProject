@@ -13,12 +13,17 @@ function drawTagCloud() {
 	//var s1 = WorkCountTable["juba-restaurant-phoenix"];
 	var s1 = WorkCountTable[busiid];
 	if (null == s1) {
+		d3.select("p").html("");
+		d3.layout.cloud().size([ 400, 224 ]);
 		return;
 	}
 	
 	tagHash = new HashTable();
 	top20Words = new Array();
 	top20Words = findTop20(s1, start, end);
+	
+	var sizeArray = new Array (40,35,30,25,20,18,17,16,15,14,13,12,11,10,9,8,7,6,5);
+   	var index = 0;
 	fill = d3.scale.category20();
 
 	var arrayWords = new Array();
@@ -27,7 +32,7 @@ function drawTagCloud() {
 	d3.layout.cloud().size([ 400, 224 ]).words(arrayWords.map(function(d) {
 		return {
 			text : d,
-			size : 12 + Math.random() * 20
+			size : sizeArray[index++]
 		};
 	})).padding(5).rotate(function() {
 		return ~~(Math.random() * 2) * 90;
