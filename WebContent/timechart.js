@@ -194,7 +194,7 @@ graph.render();
  */
 graph.render();
 
-updateChart(4013103604, TIMELS, 1, 24);
+updateChart(geoid, TIMELS, 1, 24);
 function updateChart(geoid, TIMELS, left, right) {
 	var crimeLS = getTimeList(geoid, TIMELS, 'C', left, right);
 	var rateLS = getTimeList(geoid, TIMELS, 'R', left, right);
