@@ -1,31 +1,42 @@
 #menu {
 	position: absolute;
+	left: 8px;
+	top: 2px;
 	width: 600px;
-	height: 30px;
-	margin-left:8px;
-	margin-right:auto;
+	height: 25px;
+	background-color: #E5E5E5;
 }
 
 #dataMenu {
 	position: absolute;
-	margin-left: auto;
-	margin-right: auto;
+	left: 50px;
+	top: 1px;
+	width: 100px;
+	height: 30;
 }
 
 #schemeMenu {
 	position: absolute;
-	margin-left: 20%;
-	margin-right: auto;
+	left: 176px;
+	top: 1px;
+	width: 100px;
+	height: 30;
 }
 
 #check1 {
 	position: absolute;
-	margin-left: 60%;
-	margin-right: auto;
+	left: 300px;
+	top: 1px;
+	width: 150px;
+	height: 30;
+	font-size:20px;
 }
 
 #check2 {
 	position: absolute;
-	margin-left: 80%;
-	margin-right: auto;
+	left: 450px;
+	top: 1px;
+	width: 150px;
+	height: 30;
+	font-size:20px;
 }
