@@ -65,7 +65,12 @@ function getAveRating(geoid, begin, end){
 	sum = 0;
 	for (var i=begin;i <= end; i++) {
 		var review = GEOIDTable[geoid][i + REVIEW_OFFSET];
-		var star = GEOIDTable[geoid][i + STAR_OFFSET] * Math.random();
+		var trick = Math.random();
+		if (trick < 0.5){
+			trick = 0.5 + trick; 
+		}
+		
+		var star = GEOIDTable[geoid][i + STAR_OFFSET] * trick;
 		rSum += review;
 		sSum += star;
     }
