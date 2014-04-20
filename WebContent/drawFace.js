@@ -141,9 +141,7 @@ function getEyebrow(geoid, begin, end) {
 
 // smile is the avg-rating
 function getSmile(geoid, begin, end) {
-	var nSum = getReview(geoid, begin, end);
-	var rSum = getStar(geoid, begin, end);
-	var ave = rSum / nSum;
+	var ave = getAveRating(geoid, begin, end);
 	
 	var currentGrades = [];
 	$(function(){
