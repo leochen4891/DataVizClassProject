@@ -94,19 +94,27 @@ function calcTotal(flag, start, end) {
 	var sum = 0;
 	for (var i = 0; i < c.length; i++) {
 		var item = c[i].properties;
-		if (start == end) {
-			sum = sum + item[flag + start];
-		} else {
-			var t = 0;
-			for (var j = start; j <= end; j++) {
-				t = t + item[flag + j];
-			}
-			sum = sum + t;
+		var t = 0;
+		for (var j = start; j <= end; j++) {
+			t = t + item[flag + j];
 		}
+		sum = sum + t;
 	}
 	return sum;
 }
 
+function calcREVtotal(start, end){
+	var REVIEW_OFFSET = 51;
+	var sum = 0;
+	for(var j = 0; j < GEOIDs.length; j++){
+		var sss = 0;
+        for (var i=start;i <= end; i++) {
+            sss += GEOIDTable[GEOIDs[j]][i + REVIEW_OFFSET];
+        }
+		sum += sss;
+	}
+	return sum;
+}
 function vCount(start, end) {
 	var c = tractData.features;
 	var vCount = 0;
@@ -127,6 +135,7 @@ function sCount(flag, start, end){
 			if (item[flag + j] != 0){
 				ct++;
 			}
+			//console.log(item[flag+j]);
 		}
 	}
 	return ct;
@@ -143,14 +152,11 @@ function sumList(flag, start, end) {
 	var c = tractData.features;
 	var list = [];
 	for (var i = 0; i < c.length; i++) {
-
-		
-			var sum = 0;
-			for (var j = start; j <= end; j++) {
-				sum = sum + c[i].properties[flag + j];
-			}
-			list.push(sum);
-		
+		var sum = 0;
+		for (var j = start; j <= end; j++) {
+			sum = sum + c[i].properties[flag + j];
+		}
+		list.push(sum);
 	}
 	return list;
 }
@@ -172,7 +178,7 @@ function getAveList(start, end){
 	var nList = sumList('R_M', start, end);
 	//alert(nList);
 	var rList = aveSumList('S_M', start, end);
-	console.log("rList = " + rList);
+	//console.log("rList = " + rList);
 	//alert(rList);
 	var aveList = [];
 	for (var i = 0; i < nList.length; i++){
@@ -206,7 +212,8 @@ function getAveInfo(start, end){
 	for(var i = 0; i < alist.length; i++){
 		sum += alist[i];
 	}
-	Status.RAT.total = sum;
+	//Status.RAT.total = sum;
+	//console.log("sum = " + sum + ", len = " + vCount(1, 1));
 	Status.RAT.ave = sum / vCount(1, 1);//sCount('R_M', start, end);//vCount(start, end);
 	getAveGrades(alist);
 }
@@ -259,7 +266,16 @@ function updateOne(index, flag, start, end, count){
 		});
 
 	Status[index].total = calcTotal(flag, start, end);
+	/*if (flag == 'VC_M'){
+		console.log( 'total = ' + calcTotal('VC_M', start, end));
+		Status[index].total = calcTotal('VC_M', start, end);
+	}*/
 	Status[index].ave = Status[index].total / count;//sCount('C_M', start, end);
+	
+	/*if (flag == 'VC_M'){
+		console.log( 'count = ' + count);
+		console.log( 'ave = ' + Status[index].ave);
+	}*/
 	Status[index].med = median(slist);
 	Status[index].eint = equalInt(slist);
 	Status[index].qint = quantInt(slist);
@@ -281,11 +297,11 @@ function updatePopInc(index, flag, start, end, count){
 function getGrade(start, end) {
 	var num = vCount(start, end);
 	var len = vCount(1, 1);
-	updateOne('CRM', 'C_M', start, end, len);
+	updateOne('CRM', 'C_M', start, end, sCount('C_M', start, end));
 
-	updateOne('VCR', 'VC_M', start, end, len);
+	updateOne('VCR', 'VC_M', start, end, sCount('VC_M', start, end));
 
-	updateOne('REV', 'R_M', start, end, len);
+	updateOne('REV', 'R_M', start, end, sCount('R_M', start, end));
 
 	updatePopInc('POP', 'Population', start, end, len);
 	updatePopInc('INC', 'Income', start, end, len);
@@ -296,11 +312,11 @@ function getGrade(start, end) {
 function updateGrade(start, end) {
 	var num = vCount(start, end);
 	var len = vCount(1, 1);
-	updateOne('CRM', 'C_M', start, end, len);
+	updateOne('CRM', 'C_M', start, end, sCount('C_M', start, end));
 
-	updateOne('VCR', 'VC_M', start, end, len);
+	updateOne('VCR', 'VC_M', start, end, sCount('VC_M', start, end));
 
-	updateOne('REV', 'R_M', start, end, len);
+	updateOne('REV', 'R_M', start, end, sCount('R_M', start, end));
 	
 	getAveInfo(start, end);
 }
