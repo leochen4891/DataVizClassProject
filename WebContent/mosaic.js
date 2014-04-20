@@ -128,6 +128,7 @@ function getMousePos(canvas, evt) {
 }
 
 function drawMosaic() {
+	console.log("draw mosaic, geoid = " + geoid);
 	var canvas = document.getElementById("canvasMosaic");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);

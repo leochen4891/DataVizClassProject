@@ -9,26 +9,26 @@
 <link rel="stylesheet" href="lib/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="lib/style.css">
 
-<script type = "text/javascript" src = "lib/jquery-1.11.0.min.js"/></script>
-<script type = "text/javascript" src = "lib/jquery-ui.js"/></script>
+<script type="text/javascript" src="lib/jquery-1.11.0.min.js" /></script>
+<script type="text/javascript" src="lib/jquery-ui.js" /></script>
 <!--script type = "text/javascript" src = "lib/jquery-ui-1.10.4/ui/jquery-ui.js"/></script-->
-<script type = "text/javascript" src = "lib/jquery-migrate-1.2.1.min.js"/></script>
+<script type="text/javascript" src="lib/jquery-migrate-1.2.1.min.js" /></script>
 <!--script src="lib/vendor/d3.min.js"></script-->
 <script src="lib/d3.min.js"></script>
 <script src="lib/vendor/d3.layout.min.js"></script>
-<script type = "text/javascript" src = "lib/rickshaw.min.js"></script>
+<script type="text/javascript" src="lib/rickshaw.min.js"></script>
 <!--script src="http://d3js.org/d3.v3.min.js"></script-->
 <script src="lib/d3.layout.cloud.js"></script>
 
 
 <!-- Status -->
 <link rel="stylesheet" href="lib/leaflet.css" />
-<link rel="stylesheet" href="lib/rickshaw.min.css"/>
-<link rel="stylesheet" href="menu.css"/>
-<link rel="stylesheet" href="map.css"/>
-<link rel="stylesheet" href="slider.css"/>
-<link rel="stylesheet" href="timechart.css"/>
-<link rel="stylesheet" href="parallel.css"/>
+<link rel="stylesheet" href="lib/rickshaw.min.css" />
+<link rel="stylesheet" href="menu.css" />
+<link rel="stylesheet" href="map.css" />
+<link rel="stylesheet" href="slider.css" />
+<link rel="stylesheet" href="timechart.css" />
+<link rel="stylesheet" href="parallel.css" />
 <script src="dat/GEOIDTable.js"></script>
 <script src="dat/WordCountTable.js"></script>
 <script src="dat/top5busiList.js"></script>
@@ -45,12 +45,13 @@
 
 #map {
 	position: absolute;
-	left:8px;
+	left: 8px;
 	top: 30px;
 	width: 600px;
 	height: 500px;
 }
-#timechart{
+
+#timechart {
 	position: absolute;
 	left: 8px;
 	top: 570px;
@@ -58,6 +59,7 @@
 	height: 185px;
 	background-color: white;
 }
+
 #canvasParallel {
 	position: absolute;
 	left: 614px;
@@ -67,6 +69,15 @@
 	background-color: white;
 	border: 1px solid #d1d1d1;
 }
+
+#parasymbols {
+	position: absolute;
+	left: 625px;
+	top: 248px;
+	width: 360px;
+	height: 33px;
+}
+
 #canvasMosaic {
 	position: absolute;
 	left: 615px;
@@ -75,6 +86,7 @@
 	height: 240px;
 	background-color: white
 }
+
 #tagCloud {
 	position: absolute;
 	left: 615px;
@@ -83,19 +95,21 @@
 	height: 215px;
 	background-color: white
 }
+
 .canvasFace {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 }
 
-#test{
+
+#test {
 	position: absolute;
-	top : 200px;
-	left : 1100px;
-	width : 400px;
-	height :200px;
-	border : 1px solid red;
+	top: 200px;
+	left: 1100px;
+	width: 400px;
+	height: 200px;
+	border: 1px solid red;
 }
 </style>
 
@@ -103,68 +117,72 @@
 </head>
 <body>
 
-<div id="container">
-	<div id = "menu"> 
-			<div id = "dataMenu">
-				<select id = "dataM">
-					<option value= 'pop'>Population</option>
-					<option value= 'income'>Income</option>
-					<option value= 'crime'>Crime</option>
-					<option value= 'rateN'>Review Number</option>
+	<div id="container">
+		<div id="menu">
+			<div id="dataMenu">
+				<select id="dataM">
+					<option value='pop'>Population</option>
+					<option value='income'>Income</option>
+					<option value='crime'>Crime</option>
+					<option value='rateN'>Review Number</option>
 				</select>
 			</div>
-			<div id = "schemeMenu">
-				<select id = "schemeM">
+			<div id="schemeMenu">
+				<select id="schemeM">
 					<option value='equalInterval'>Equal Interval</option>
 					<option value='quantile'>Quantile</option>
 				</select>
 			</div>
-			<div id = 'check1'>
+			<div id='check1'>
 				<input type="checkbox" id="chk1" checked="checked"> <label for="chk1">Fix Legend</label>
 			</div>
-			<div id = 'check2'>
-				<input type="checkbox" id="checkboxShowFaces" > <label for="checkboxShowFaces">Show Faces</label>
+			<div id='check2'>
+				<input type="checkbox" id="checkboxShowFaces"> <label for="checkboxShowFaces">Show Faces</label>
 			</div>
-	</div>
-	<div id="map"></div>
-	<div id="slider"></div>
-	<div id="timechart">
-		<div id="chart_container">
-			<div id="x_axis"></div>
-			<div id="y_axis"></div>
-			<div id="y_axis1"></div>
-			<div id="chart"></div>
-			<div id="timeLegend"></div>
-			<div id="startTime"></div>
-			<div id = "endTime"></div>
-			<!--<form id="offset_form" class="toggler">
+		</div>
+		<div id="map"></div>
+		<div id="slider"></div>
+		<div id="timechart">
+			<div id="chart_container">
+				<div id="x_axis"></div>
+				<div id="y_axis"></div>
+				<div id="y_axis1"></div>
+				<div id="chart"></div>
+				<div id="timeLegend"></div>
+				<div id="startTime"></div>
+				<div id="endTime"></div>
+				<!--<form id="offset_form" class="toggler">
 				<input type="radio" name="offset" id="lines" value="lines" checked>
 				<label class="lines" for="lines">lines</label><br>
 				<input type="radio" name="offset" id="stack" value="zero">
 				<label class="stack" for="stack">stack</label>
 			</form>-->
+			</div>
 		</div>
-	</div>
-	
+
 		<canvas id="canvasParallel" class="canvasParallel" width="400" height="240" style="border: 1px solid #d1d1d1;">error</canvas>
-		<canvas id="canvasMosaic" width="400" height="240" style="border:1px solid #d3d3d3;"></canvas>
-	<p id="tagCloud"></p>
+		<img id="parasymbols" src="img/para.bmp" width="360" height="33"></img>
+		<canvas id="canvasMosaic" width="400" height="240" style="border: 1px solid #d3d3d3;"></canvas>
+		<p id="tagCloud"></p>
 
-</div>
-<div id="test"></div>
+	</div>
+	<div id="test"></div>
 
-<script src="lib/leaflet.js"></script>	
-<script type="text/javascript" src="dat/tractData.js"></script> 
-<script type="text/javascript" src="dat/timeData.js"></script>
-<script src ="Status.js"></script>
-<script src="timechart.js"></script>
-<script src="geoid.js"></script>
-<script src="map.js"></script>
-<script src="slider.js"></script>
-<script src="menu.js"></script>
-<script src="drawFace.js"></script>
-<script src="parallel.js"></script>
-<script src="tagCloud.js"></script>
-<script src="mosaic.js"></script>
+	<script src="lib/leaflet.js"></script>
+	<script type="text/javascript" src="dat/tractData.js"></script>
+	<script type="text/javascript" src="dat/timeData.js"></script>
+	<script src="Status.js"></script>
+	<script src="timechart.js"></script>
+	<script src="geoid.js"></script>
+	<script src="map.js"></script>
+	<script src="slider.js"></script>
+	<script src="menu.js"></script>
+	<script src="drawFace.js"></script>
+	<script src="parallel.js"></script>
+	<script src="tagCloud.js"></script>
+	<script src="mosaic.js"></script>
+
+
+
 </body>
 </html>
