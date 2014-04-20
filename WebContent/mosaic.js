@@ -73,18 +73,27 @@ function mouseMoveHandler(event) {
 	var i = 0;
 	for (i = 0; i < busiList.length; i++) {
 		offset += busiHeights[i];
-		//alert("i = " + i + ", mouse.Y = " + mousePos.y + ", offset = " + offset);
+		// alert("i = " + i + ", mouse.Y = " + mousePos.y + ", offset = " +
+		// offset);
 		if (mousePos.y <= offset) {
 			break;
 		}
 	}
-	
-	  var context = canvas.getContext('2d');
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      drawMosaic();
-      context.font = '18pt Calibri';
-      context.fillStyle = 'black';
-      context.fillText("Mouse position: " + mousePos.x + "," + mousePos.y, 10, 25);	
+	var context = canvas.getContext('2d');
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	drawMosaic();
+
+	if (busiHeights[i] < 30) {
+
+		context.fillStyle = 'white';
+		context.fillRect(mousePos.x + 5, mousePos.y - 30, canvas.width - mousePos.x , 25);
+
+		context.font = '20pt Calibri';
+		context.fillStyle = 'black';
+		context.fillText(busiList[i].name, mousePos.x + 10, mousePos.y - 7);
+	} else {
+		
+	}
 };
 
 function mouseDownHandler(event) {
@@ -95,14 +104,15 @@ function mouseDownHandler(event) {
 	var i = 0;
 	for (i = 0; i < busiList.length; i++) {
 		offset += busiHeights[i];
-		//alert("i = " + i + ", mouse.Y = " + mousePos.y + ", offset = " + offset);
+		// alert("i = " + i + ", mouse.Y = " + mousePos.y + ", offset = " +
+		// offset);
 		if (mousePos.y <= offset) {
 			break;
 		}
 	}
 
 	mosaicIndex = i;
-	//alert(mosaicIndex);
+	// alert(mosaicIndex);
 	// mosaicIndex = (Math.floor((mousePos.y / mosaicEntryHeight)));
 	busiid = busiList[mosaicIndex].id;
 	drawMosaic();
@@ -152,11 +162,10 @@ function drawMosaic() {
 		busiHeights[i] = HEIGHT * (busiStars[i] / totalStars);
 	}
 
-	console.log("---------- total = " + totalStars + " -------------------");
-	for (var i = 0; i < count; i++) {
-		console.log("id = " + busiList[i].name + ", stars = " + busiStars[i]
-				+ ", height = " + busiHeights[i]);
-	}
+	//console.log("---------- total = " + totalStars + " -------------------");
+	//for (var i = 0; i < count; i++) {
+	//	console.log("id = " + busiList[i].name + ", stars = " + busiStars[i] + ", height = " + busiHeights[i]);
+	//}
 
 	var offset = 0;
 

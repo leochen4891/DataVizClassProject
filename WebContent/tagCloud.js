@@ -12,6 +12,9 @@ function drawTagCloud() {
 
 	//var s1 = WorkCountTable["juba-restaurant-phoenix"];
 	var s1 = WorkCountTable[busiid];
+	if (null == s1) {
+		return;
+	}
 	
 	tagHash = new HashTable();
 	top20Words = new Array();

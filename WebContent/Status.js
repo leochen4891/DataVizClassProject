@@ -7,7 +7,7 @@ function addstring(text, s) {
 	var content = document.createTextNode(s);
 	text.appendChild(content);
 }
-var geoid = 4013615000;
+var geoid = 4013103604;
 var start;
 var end;
 
@@ -246,74 +246,44 @@ function quantInt(slist) {
 		slist[slist.length - 1]
 	];
 }
-function getGrade(start, end) {
-	var num = vCount(start, end);
-	var len = vCount(1, 1);
-	var list = sumList('C_M', start, end);
+
+function updateOne(index, flag, start, end, count){
+	var list = sumList(flag, start, end);
 	var slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.CRM.total = calcTotal('C_M', start, end);
-	Status.CRM.ave = Status.CRM.total / len;//sCount('C_M', start, end);
-	Status.CRM.med = median(slist);
-	Status.CRM.eint = equalInt(slist);
-	Status.CRM.qint = quantInt(slist);
+	Status[index].total = calcTotal(flag, start, end);
+	Status[index].ave = Status[index].total / count;//sCount('C_M', start, end);
+	Status[index].med = median(slist);
+	Status[index].eint = equalInt(slist);
+	Status[index].qint = quantInt(slist);
+}
 
-	list = sumList('VC_M', start, end);
-	slist = list.sort(function (a, b) {
+function updatePopInc(index, flag, start, end, count){
+	var list = totList(flag);
+	var slist = list.sort(function (a, b) {
 			return a - b;
 		});
 
-	Status.VCR.total = calcTotal('VC_M', start, end);
-	Status.VCR.ave = Status.VCR.total / len;//sCount('VC_M', start, end);
-	Status.VCR.med = median(slist);
-	Status.VCR.eint = equalInt(slist);
-	Status.VCR.qint = quantInt(slist);
+	Status[index].total = total(flag);
+	Status[index].ave = Status[index].total / count;
+	Status[index].med = median(slist);
+	Status[index].eint = equalInt(slist);
+	Status[index].qint = quantInt(slist);
 
-	list = sumList('R_M', start, end);
-	slist = list.sort(function (a, b) {
-			return a - b;
-		});
+}
+function getGrade(start, end) {
+	var num = vCount(start, end);
+	var len = vCount(1, 1);
+	updateOne('CRM', 'C_M', start, end, len);
 
-	Status.REV.total = calcTotal('R_M', start, end);
-	Status.REV.ave = Status.REV.total / len;//sCount('R_M', start, end);
-	Status.REV.med = median(slist);
-	Status.REV.eint = equalInt(slist);
-	Status.REV.qint = quantInt(slist);
+	updateOne('VCR', 'VC_M', start, end, len);
 
-	/*list = sumList('S_M', start, end);
-	slist = list.sort(function (a, b) {
-			return a - b;
-		});
+	updateOne('REV', 'R_M', start, end, len);
 
-	Status.STR.total = calcTotal('S_M', start, end);
-	Status.STR.ave = Status.STR.total / len;//sCount('S_M', start, end);
-	Status.STR.med = median(slist);
-	Status.STR.eint = equalInt(slist);
-	Status.STR.qint = quantInt(slist);
-
-	list = totList('Population');
-	slist = list.sort(function (a, b) {
-			return a - b;
-		});*/
-
-	Status.POP.total = total('Population');
-	Status.POP.ave = Status.POP.total / len;
-	Status.POP.med = median(slist);
-	Status.POP.eint = equalInt(slist);
-	Status.POP.qint = quantInt(slist);
-
-	list = totList('Income');
-	slist = list.sort(function (a, b) {
-			return a - b;
-		});
-
-	Status.INC.total = total('Income');
-	Status.INC.ave = Status.INC.total / len;
-	Status.INC.med = median(slist);
-	Status.INC.eint = equalInt(slist);
-	Status.INC.qint = quantInt(slist);
+	updatePopInc('POP', 'Population', start, end, len);
+	updatePopInc('INC', 'Income', start, end, len);
 	
 	getAveInfo(start, end);
 }
@@ -321,49 +291,11 @@ function getGrade(start, end) {
 function updateGrade(start, end) {
 	var num = vCount(start, end);
 	var len = vCount(1, 1);
-	var list = sumList('C_M', start, end);
-	var slist = list.sort(function (a, b) {
-			return a - b;
-		});
+	updateOne('CRM', 'C_M', start, end, len);
 
-	Status.CRM.total = calcTotal('C_M', start, end);
-	Status.CRM.ave = Status.CRM.total / len;//sCount('C_M', start, end);
-	Status.CRM.med = median(slist);
-	Status.CRM.eint = equalInt(slist);
-	Status.CRM.qint = quantInt(slist);
+	updateOne('VCR', 'VC_M', start, end, len);
 
-	list = sumList('VC_M', start, end);
-	slist = list.sort(function (a, b) {
-			return a - b;
-		});
-
-	Status.VCR.total = calcTotal('VC_M', start, end);
-	Status.VCR.ave = Status.VCR.total / len;//sCount('VC_M', start, end);
-	Status.VCR.med = median(slist);
-	Status.VCR.eint = equalInt(slist);
-	Status.VCR.qint = quantInt(slist);
-
-	list = sumList('R_M', start, end);
-	slist = list.sort(function (a, b) {
-			return a - b;
-		});
-
-	Status.REV.total = calcTotal('R_M', start, end);
-	Status.REV.ave = Status.REV.total / len;//sCount('R_M', start, end);
-	Status.REV.med = median(slist);
-	Status.REV.eint = equalInt(slist);
-	Status.REV.qint = quantInt(slist);
-
-	/*list = sumList('S_M', start, end);
-	slist = list.sort(function (a, b) {
-			return a - b;
-		});
-
-	Status.STR.total = calcTotal('S_M', start, end);
-	Status.STR.ave = Status.STR.total / len;//sCount('S_M', start, end);
-	Status.STR.med = median(slist);
-	Status.STR.eint = equalInt(slist);
-	Status.STR.qint = quantInt(slist);*/
+	updateOne('REV', 'R_M', start, end, len);
 	
 	getAveInfo(start, end);
 }
