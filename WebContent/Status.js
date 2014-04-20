@@ -140,15 +140,11 @@ function sumList(flag, start, end) {
 	var c = tractData.features;
 	var list = [];
 	for (var i = 0; i < c.length; i++) {
-		if (start == end) {
-			list.push(c[i].properties[flag + start]);
-		} else {
-			var sum = 0;
-			for (var j = start; j <= end; j++) {
-				sum = sum + c[i].properties[flag + j];
-			}
-			list.push(sum);
+		var sum = 0;
+		for (var j = start; j <= end; j++) {
+			sum = sum + c[i].properties[flag + j];
 		}
+		list.push(sum);
 	}
 	return list;
 }
@@ -175,6 +171,7 @@ function getAveList(start, end){
 	for (var i = 0; i < nList.length; i++){
 		if(nList[i] != 0){
 			aveList.push(rList[i]/nList[i]);
+			
 		}
 		else{
 			aveList.push(0);
@@ -186,6 +183,7 @@ function getAveList(start, end){
 
 
 function getAveGrades(aveList){
+	//alert(aveList);
 	var list = aveList.sort(function(a, b){ 
 		return a-b;
 	});
@@ -202,7 +200,7 @@ function getAveInfo(start, end){
 		sum += alist[i];
 	}
 	Status.RAT.total = sum;
-	Status.RAT.ave = sum / sCount('R_M', start, end);//vCount(start, end);
+	Status.RAT.ave = sum / vCount(1, 1);//sCount('R_M', start, end);//vCount(start, end);
 	getAveGrades(alist);
 }
 
@@ -308,12 +306,12 @@ function updateParaLines(start, end) {
     paraAvgLine.REV = Status.REV.ave;
     paraAvgLine.RAT = Status.RAT.ave;
     
-    paraMedLine.POP = Status.POP.ave;
-    paraMedLine.INC = Status.INC.ave;
-    paraMedLine.CRM = Status.CRM.ave;
-    paraMedLine.VCR = Status.VCR.ave;
-    paraMedLine.REV = Status.REV.ave;
-    paraMedLine.RAT = Status.RAT.ave;
+    paraMedLine.POP = Status.POP.med;
+    paraMedLine.INC = Status.INC.med;
+    paraMedLine.CRM = Status.CRM.med;
+    paraMedLine.VCR = Status.VCR.med;
+    paraMedLine.REV = Status.REV.med;
+    paraMedLine.RAT = Status.RAT.med;
 
     if (null != geoid) {
         paraGeoidLine.POP = getPop(Number(geoid));
