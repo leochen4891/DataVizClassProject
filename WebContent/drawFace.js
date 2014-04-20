@@ -91,7 +91,7 @@ function getScale(geoid) {
 	var pop = value2grade(population, Status.POP.eint);
 	var zoom = Math.floor(map.getZoom());
 	var size = getSizeByPopZoom(pop, zoom);
-	console.log("pop = " + pop + ", zoom = " + zoom + ", size = " + size);
+	//console.log("pop = " + pop + ", zoom = " + zoom + ", size = " + size);
 	return size;
 }
 // skin is the income, 1 to 10, 10 is the highest

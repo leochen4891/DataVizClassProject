@@ -16,10 +16,13 @@ var busiid;
 
 var paraLines = new Array();
 var paraAvgLine = new Object();
+paraAvgLine.NAM = "avg";
 paraAvgLine.COL = "#FF0000";
 var paraMedLine = new Object();
-paraMedLine.COL = "#00FF00";
+paraMedLine.NAM = "med";
+paraMedLine.COL = "#00A226";
 var paraGeoidLine = new Object();
+paraGeoidLine.NAM = "cur";
 paraGeoidLine.COL = "#000000";
 
 paraLines[0] = paraAvgLine;

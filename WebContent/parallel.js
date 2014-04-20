@@ -33,19 +33,19 @@ updateParaLines(1, 24);
 drawParallel("canvasParallel");
 
 function drawParallel(canvasName) {
-    // prepare the 3 lines, avg, med, and target
+	// prepare the 3 lines, avg, med, and target
 
 	var c = document.getElementById(canvasName);
 	var ctx = c.getContext("2d");
-    ctx.clearRect(0, 0, c.width, c.height);
-   // ctx.translate(0.5, 0.5); // to fix the blurry text issue
+	ctx.clearRect(0, 0, c.width, c.height);
+	// ctx.translate(0.5, 0.5); // to fix the blurry text issue
 
 	var WIDTH = 400;
 	var HEIGHT = 240;
 
 	var MARGIN_LEFT = 30;
 	var MARGIN_TOP = 15;
-	var MARGIN_RIGHT = 50;
+	var MARGIN_RIGHT = 70;
 	var MARGIN_BOTTOM = 15;
 	var TEXT_HEIGHT = 18;
 	var FONT_HEIGHT = TEXT_HEIGHT * 0.8;
@@ -60,11 +60,10 @@ function drawParallel(canvasName) {
 
 	// draw each axis
 	var keys = Object.keys(Status);
-	//alert(keys);
+	// alert(keys);
 	for (var i = 0; i < keys.length; i++) {
 		var entryCount = keys.length;
-		var entryWidth = (WIDTH - MARGIN_LEFT - MARGIN_RIGHT)
-				/ (entryCount - 1);
+		var entryWidth = (WIDTH - MARGIN_LEFT - MARGIN_RIGHT) / (entryCount - 1);
 		var posX = MARGIN_LEFT + entryWidth * i;
 		var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT;
 
@@ -82,7 +81,7 @@ function drawParallel(canvasName) {
 
 		// scale bar and numbers on vertical line
 		var intervals = Status[keys[i]].eint;
-		//alert(intervals);
+		// alert(intervals);
 		var entryHeight = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) / (intervals.length - 1);
 		var barWidth = 5;
 		for (var j = 0; j < intervals.length; j++) {
@@ -94,47 +93,61 @@ function drawParallel(canvasName) {
 		}
 		// scale number
 		ctx.font = FONT_HEIGHT * 0.8 + "px Arial";
-		ctx.fillText(intervals[0], posX + barWidth + 2, posY - FONT_HEIGHT
-				* 0.2);
+		ctx.fillText(intervals[0], posX + barWidth + 2, posY - FONT_HEIGHT * 0.2);
 		ctx.stroke();
 		ctx.fill();
 		// scale number
 		ctx.font = FONT_HEIGHT * 0.8 + "px Arial";
-		ctx.fillText(intervals[intervals.length - 1], posX + barWidth + 2, posY
-				- FONT_HEIGHT * 0.2 - entryHeight * (intervals.length - 1));
+		var topNumber = intervals[intervals.length - 1];
+		if (isFloat(topNumber)) {
+			topNumber = topNumber.toFixed(2);
+		}
+		ctx.fillText(topNumber, posX + barWidth + 2, posY - FONT_HEIGHT * 0.2 - entryHeight * (intervals.length - 1));
 		ctx.stroke();
 		ctx.fill();
 	}
 
 	// draw data lines
-	for (var i = paraLines.length-1; i >= 0; i--) {
-	    var keys = Object.keys(paraLines[i]);
-        //alert(paraLines[i]);
-	    ctx.strokeStyle = paraLines[i].COL;
-	    ctx.beginPath();
-	    for (var j = 0; j < keys.length - 1; j++) {
-	    	//var intervals = Status[keys[j]].eint;
-            var intervals = Status[Object.keys(Status)[j]].eint;
-	    	var value = paraLines[i][keys[j+1]];
-	    	var max = intervals[intervals.length - 1];
-	    	var min = intervals[0];
-	    	var temp = (value - min) / (max - min);
-	    	var offset = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT)
-	    			* (temp);
-	    	var posX = MARGIN_LEFT + entryWidth * j;
-	    	var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT - offset;
+	for (var i = paraLines.length - 1; i >= 0; i--) {
+		var keys = Object.keys(paraLines[i]);
+		// alert(paraLines[i]);
+		ctx.strokeStyle = paraLines[i].COL;
+		ctx.beginPath();
+		for (var j = 0; j < keys.length - 2; j++) {
+			// var intervals = Status[keys[j]].eint;
+			var intervals = Status[Object.keys(Status)[j]].eint;
+			var value = paraLines[i][keys[j + 2]];
+			var max = intervals[intervals.length - 1];
+			var min = intervals[0];
+			var temp = (value - min) / (max - min);
+			var offset = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) * (temp);
+			var posX = MARGIN_LEFT + entryWidth * j;
+			var posY = HEIGHT - MARGIN_BOTTOM - TEXT_HEIGHT - offset;
 
-	    	/*if (j == 5) {
-	    		alert(keys[j+1]);
-	    	}*/
-	    	if (j == 0) {
-	    		ctx.moveTo(posX, posY);
-	    	} else {
-	    		ctx.lineTo(posX, posY);
-	    }
+			/*
+			 * if (j == 5) { alert(keys[j+1]); }
+			 */
+			if (j == 0) {
+				ctx.moveTo(posX, posY);
+			} else {
+				ctx.lineTo(posX, posY);
+			}
+
+		}
+		ctx.stroke();
+
+		// legend
+		ctx.beginPath();
+		ctx.fillStyle = paraLines[i].COL;
+		ctx.fillRect(WIDTH - 50, 150 + i * 20, 10, 10);
+		ctx.fill();
+		ctx.font = FONT_HEIGHT + "px Arial";
+		ctx.fillText(paraLines[i].NAM, WIDTH - 50 + 10 + FONT_HEIGHT * 0.2, 150 + i * 20 + FONT_HEIGHT * 0.6);
+		ctx.stroke();
 
 	}
-	ctx.stroke();
 
-	}
+}
+function isFloat(n) {
+	return n === +n && n !== (n | 0);
 }
