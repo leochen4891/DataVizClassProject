@@ -319,6 +319,10 @@ function updateParaLines(start, end) {
         paraGeoidLine.POP = getPop(Number(geoid));
         paraGeoidLine.INC = getIncome(Number(geoid));
         paraGeoidLine.CRM = getCrime(Number(geoid), start, end);
+   paraGeoidLine.VCR = getVioCrime(Number(geoid), start, end);
+        paraGeoidLine.REV = getReview(Number(geoid), start, end);
+        paraGeoidLine.RAT = getStar(Number(geoid), start, end);
+
        
         paraGeoidLine.VCR = getVioCrime(Number(geoid), start, end);
         paraGeoidLine.REV = getReview(Number(geoid), start, end);
