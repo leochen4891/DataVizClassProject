@@ -126,7 +126,7 @@ var palette = new Rickshaw.Color.Palette();
 var graph = new Rickshaw.Graph({
 		element : document.querySelector("#chart"),
 		width : 480,
-		height : 162,
+		height : 175,
 		renderer : 'line',
 		series : [{
 				name : "Crime",
@@ -156,7 +156,7 @@ var y_axis = new Rickshaw.Graph.Axis.Y.Scaled({
 		tickFormat : function (d) {
 			return d / 200;
 		},
-		scale : d3.scale.linear().range([0, 162]),
+		scale : d3.scale.linear().range([0, 170]),
 		element : document.getElementById('y_axis'),
 
 	});
@@ -166,7 +166,7 @@ var y_axis1 = new Rickshaw.Graph.Axis.Y.Scaled({
 		tickFormat : function (d) {
 			return d / 200;
 		},
-		scale : d3.scale.linear().range([0, 162]),
+		scale : d3.scale.linear().range([0, 170]),
 		element : document.getElementById('y_axis1'),
 
 	});
@@ -212,8 +212,8 @@ function updateChart(geoid, TIMELS, left, right) {
 	var rmax = d3.max(rateLS, function (d) {
 			return d.y;
 		});
-	var cScale = d3.scale.linear().domain([cmin, cmax]).range([0, 162]);
-	var rScale = d3.scale.linear().domain([rmin, rmax]).range([0, 162]);
+	var cScale = d3.scale.linear().domain([cmin, cmax]).range([0, 170]);
+	var rScale = d3.scale.linear().domain([rmin, rmax]).range([0, 170]);
 
 	graph.series[0].data = crimeLS;
 	graph.series[0].scale = cScale;
