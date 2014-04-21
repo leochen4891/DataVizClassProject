@@ -175,7 +175,7 @@ legend.onAdd = function (map) {
 
 		labels.push(
 			'<i style="background:' + getBlueColor(from + 1, Status.POP.eint) + '"></i> ' +
-			Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
+			Math.round(from) + (to ? '&ndash;' + Math.round(to) : ''));
 	}
 
 	div.innerHTML = labels.join('<br>');
@@ -204,23 +204,23 @@ function updateLegend(pgrades, flag) {
 			if (flag == 'green') {
 				labels.push(
 					'<i style="background:' + getGreenColor(from + 1, pgrades) + '"></i> ' +
-					Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
+					Math.round(from) + (to ? '&ndash;' + Math.round(to) : ''));
 			} else if (flag == 'blue') {
 				labels.push(
 					'<i style="background:' + getBlueColor(from + 1, pgrades) + '"></i> ' +
-					Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
+					Math.round(from) + (to ? '&ndash;' + Math.round(to) : ''));
 			} else if (flag == 'yellow') {
 				labels.push(
 					'<i style="background:' + getYellowColor(from + 1, pgrades) + '"></i> ' +
-					Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
+					Math.round(from) + (to ? '&ndash;' + Math.round(to) : ''));
 			} else if (flag == 'red') {
 				labels.push(
 					'<i style="background:' + getRedColor(from + 1, pgrades) + '"></i> ' +
-					Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
+					Math.round(from) + (to ? '&ndash;' + Math.round(to) : ''));
 			} else {
 				labels.push(
 					'<i style="background:' + getOrangeColor(from + 1, pgrades) + '"></i> ' +
-					Math.round(from) + (to ? '&ndash;' + Math.round(to) : '+'));
+					Math.round(from) + (to ? '&ndash;' + Math.round(to) : ''));
 			}
 		}
 
