@@ -7,11 +7,11 @@ function addstring(text, s) {
 	var content = document.createTextNode(s);
 	text.appendChild(content);
 }
-var geoid = 4013105102;
+var geoid;
 var start;
 var end;
 
-var mosaicIndex = 0;
+var mosaicIndex = -1;
 var busiid;
 
 var paraLines = new Array();

@@ -3,6 +3,7 @@ var top20Words;// = new Array();
 var fill;// = d3.scale.category20();
 
 function drawTagCloud() {
+	//console.log("draw tag cloud, busiid = " + busiid);
 	var start = 1;
 	var end = 24;
 	$(function() {

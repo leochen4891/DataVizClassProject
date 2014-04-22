@@ -42,8 +42,6 @@ function updateBusiList() {
 			}
 		}
 	}
-
-	busiid = busiList[0].id;
 }
 
 function getStars(curid, start, end) {

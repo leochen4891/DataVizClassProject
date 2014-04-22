@@ -134,9 +134,10 @@ function onTileClick(e) {
 	});
 
 	//update mosaic
-	mosaicIndex = 0;
-
 	updateBusiList();
+	//console.log(busiList);
+	mosaicIndex = 0;
+	busiid = busiList[0].id;
 	drawMosaic();
 	drawTagCloud();
 }
