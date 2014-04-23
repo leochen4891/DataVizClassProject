@@ -4,7 +4,7 @@ var busiStars = new Array();
 var busiHeights = new Array();
 
 // from geoid to get top 5 most reviewed business id
-function updateBusiList() {
+function updateBusiList(start, end) {
 	// console.log("------------------- update top 5 busi list
 	// ----------------------");
 	var gid = Number(geoid);
@@ -113,8 +113,14 @@ function mouseDownHandler(event) {
 	// alert(mosaicIndex);
 	// mosaicIndex = (Math.floor((mousePos.y / mosaicEntryHeight)));
 	busiid = busiList[mosaicIndex].id;
-	drawMosaic();
-	drawTagCloud();
+	
+	$(function(){
+		var start = $('#slider').slider("values", 0);
+		var end = $('#slider').slider("values", 1);
+		drawMosaic(start, end);
+		drawTagCloud(start, end);
+	});
+
 };
 
 function getMousePos(canvas, evt) {

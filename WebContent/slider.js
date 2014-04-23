@@ -23,9 +23,9 @@
 			  end */
 			updateParaLines(start, end);
 			drawParallel("canvasParallel");
-			updateBusiList();
-			drawMosaic();
-			drawTagCloud();
+			updateBusiList(start, end);
+			drawMosaic(start, end);
+			drawTagCloud(start, end);
 			if ($('#dataM').val() == 'crime') {
 				if (!$('#chk1').prop("checked")) {
 					setMapGrades();

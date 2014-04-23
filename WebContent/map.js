@@ -118,10 +118,18 @@ function onTileClick(e) {
 	$(function(){
 		var left = $("#slider").slider("values", 0);
 		var right = $("#slider").slider("values", 1);
+	
 		updateGeoid(geoid, left, right);
 		updateChart(geoid, TIMELS, left, right);
 		updateParaLines(left, right);
 		drawParallel("canvasParallel");
+		//update mosaic
+		updateBusiList(left,  right);
+		//console.log(busiList);
+		mosaicIndex = 0;
+		busiid = busiList[0].id;
+		drawMosaic(left, right);
+		drawTagCloud(left, right);
 	});
 	
 	var layer = e.target;
@@ -133,13 +141,7 @@ function onTileClick(e) {
 		fillOpacity : 0.7
 	});
 
-	//update mosaic
-	updateBusiList();
-	//console.log(busiList);
-	mosaicIndex = 0;
-	busiid = busiList[0].id;
-	drawMosaic();
-	drawTagCloud();
+	;
 }
 
 
