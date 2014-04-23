@@ -113,7 +113,7 @@ function getDisplayList(list, flag){
 	return newLS;
 }
 
-
+var timeData = timeData1.concat(timeData2).concat(timeData3).concat(timeData4);
 var TIMELS = convertList(timeData);
 
 /*var test = document.getElementById("test");
