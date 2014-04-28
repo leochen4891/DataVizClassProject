@@ -571,7 +571,9 @@ $('#schemeM').change(function () {
 $('#checkboxShowFaces').change(function() {
 	if ($(this).prop("checked")) {
 		setChernoffVisible(true);
+		document.getElementById('faceLegend').style.visibility = 'visible';
 	} else {
 		setChernoffVisible(false);
+		document.getElementById('faceLegend').style.visibility = 'hidden';
 	}
 });
