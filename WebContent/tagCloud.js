@@ -2,14 +2,15 @@ var tagHash;// = new HashTable();
 var top20Words;// = new Array();
 var fill;// = d3.scale.category20();
 
-function drawTagCloud() {
-	var start = 1;
+function drawTagCloud(start, end) {
+	/*var start = 1;
 	var end = 24;
 	$(function() {
 		start = $('#slider').slider("values", 0);
 		end = $('#slider').slider("values", 1);
-	});
-
+	});*/
+	
+	//console.log("draw tag cloud, busiid = " + busiid + ", start = " + start+  ", end = " + end);
 	//var s1 = WorkCountTable["juba-restaurant-phoenix"];
 	var s1 = WorkCountTable[busiid];
 	if (null == s1) {
