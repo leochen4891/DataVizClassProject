@@ -109,11 +109,8 @@ function zoomToFeature(e) {
 
 function onTileClick(e) {
 	geoid = e.target.feature.properties.GEOID;
-	var popup = L.popup();
-	popup
-	.setLatLng(e.latlng)
-	.setContent(geoid)
-	.openOn(map);
+	var layer = e.target;
+	
 	
 	$(function(){
 		var left = $("#slider").slider("values", 0);
@@ -130,19 +127,29 @@ function onTileClick(e) {
 		busiid = busiList[0].id;
 		drawMosaic(left, right);
 		drawTagCloud(left, right);
-	});
-	
-	var layer = e.target;
-	geojson.resetStyle(layer);
-	layer.setStyle({
-		weight : 5,
-		color : '#666',
-		dashArray : '',
-		fillOpacity : 0.7
-	});
-
-	;
+		
+		function calcSum(flag, left, right){
+			var sum = 0;
+			for(var i = left; i <= right; i++){
+				sum += layer.feature.properties[flag + i];
+			}
+			return sum;
+		}
+		
+		
+		var popup = L.popup();
+		popup
+		.setLatLng(e.latlng)
+		.setContent('GEOID: ' + Number(geoid) + '<br>' +
+					'POP: ' + layer.feature.properties.Population + '<br>' +
+					'INC: ' + layer.feature.properties.Income + '<br>' +
+					'CRIME#: ' + calcSum('C_M', left, right) + '<br>' + 
+					'VIO CRIME#: ' + calcSum('VC_M', left, right) + '<br>' +
+					'REVIEW#: ' + calcSum('R_M', left, right) + '<br>')
+		.openOn(map);
+	});	
 }
+
 
 
 function onEachFeature(feature, layer) {
