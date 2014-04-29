@@ -141,11 +141,11 @@ function onTileClick(e) {
 		popup
 		.setLatLng(e.latlng)
 		.setContent('GEOID: ' + Number(geoid) + '<br>' +
-					'POP: ' + layer.feature.properties.Population + '<br>' +
-					'INC: ' + layer.feature.properties.Income + '<br>' +
-					'CRIME#: ' + calcSum('C_M', left, right) + '<br>' + 
-					'VIO CRIME#: ' + calcSum('VC_M', left, right) + '<br>' +
-					'REVIEW#: ' + calcSum('R_M', left, right) + '<br>')
+					'pop: ' + layer.feature.properties.Population + '<br>' +
+					'income: ' + layer.feature.properties.Income + '<br>' +
+					'crimes: ' + calcSum('C_M', left, right) + '<br>' + 
+					'v-crimes: ' + calcSum('VC_M', left, right) + '<br>' +
+					'reviews: ' + calcSum('R_M', left, right) + '<br>')
 		.openOn(map);
 	});	
 }
