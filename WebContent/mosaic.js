@@ -84,13 +84,13 @@ function mouseMoveHandler(event) {
 	if (busiHeights[i] < 30) {
 
 		context.fillStyle = 'white';
-		context.fillRect(mousePos.x + 5, mousePos.y - 30, canvas.width - mousePos.x , 25);
+		context.fillRect(mousePos.x + 5, mousePos.y - 30, canvas.width - mousePos.x, 25);
 
 		context.font = '20pt Calibri';
 		context.fillStyle = 'black';
 		context.fillText(busiList[i].name, mousePos.x + 10, mousePos.y - 7);
 	} else {
-		
+
 	}
 };
 
@@ -113,8 +113,8 @@ function mouseDownHandler(event) {
 	// alert(mosaicIndex);
 	// mosaicIndex = (Math.floor((mousePos.y / mosaicEntryHeight)));
 	busiid = busiList[mosaicIndex].id;
-	
-	$(function(){
+
+	$(function() {
 		var start = $('#slider').slider("values", 0);
 		var end = $('#slider').slider("values", 1);
 		drawMosaic(start, end);
@@ -132,7 +132,7 @@ function getMousePos(canvas, evt) {
 }
 
 function drawMosaic() {
-	//console.log("draw mosaic, geoid = " + geoid);
+	// console.log("draw mosaic, geoid = " + geoid);
 	var canvas = document.getElementById("canvasMosaic");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -167,10 +167,11 @@ function drawMosaic() {
 		busiHeights[i] = HEIGHT * (busiStars[i] / totalStars);
 	}
 
-	//console.log("---------- total = " + totalStars + " -------------------");
-	//for (var i = 0; i < count; i++) {
-	//	console.log("id = " + busiList[i].name + ", stars = " + busiStars[i] + ", height = " + busiHeights[i]);
-	//}
+	// console.log("---------- total = " + totalStars + " -------------------");
+	// for (var i = 0; i < count; i++) {
+	// console.log("id = " + busiList[i].name + ", stars = " + busiStars[i] + ",
+	// height = " + busiHeights[i]);
+	// }
 
 	var offset = 0;
 
@@ -178,6 +179,7 @@ function drawMosaic() {
 		var posX = 0;
 		var posY = offset;
 		offset += busiHeights[r];
+		var fontHeight = Math.min(FONT_HEIGHT_MAX, Math.floor(busiHeights[r] * 0.5));
 
 		if (r == 1)
 			ctx.fillStyle = "red";
@@ -196,18 +198,29 @@ function drawMosaic() {
 			// (mosaicEntryHeight - 1));
 			ctx.fillRect(posX + offsetX, posY, width, busiHeights[r] - 1);
 			ctx.fill();
+
+			// legend
+			// alert("test, posX = " + posX + ", poxY = " + posY + ", offsetX =
+			// " + offsetX);
+			ctx.fillStyle = "#F5AB00";
+			ctx.font = 0.6 * fontHeight + "px Arial";
+			if (r == 0) {
+				ctx.fillText((c + 1) + (c == 0 ? " star" : " stars"), posX + offsetX, posY + 0.6 * fontHeight);
+			} else {
+				ctx.fillText((c + 1), posX + offsetX, posY + 0.6 * fontHeight);
+			}
+			ctx.fill();
+
 			leftSide += busiList[r].stars[c];
 		}
 
 		if (r == mosaicIndex) {
 			ctx.fillStyle = "red";
-			var fontHeight = Math.min(FONT_HEIGHT_MAX, Math.floor(busiHeights[r] * 0.5));
 			ctx.font = 1.2 * fontHeight + "px Arial";
 			var textOffset = posY + busiHeights[r] * 0.5 + fontHeight * 0.5;
 			ctx.fillText(busiList[r].name, 10, textOffset);
 		} else {
 			ctx.fillStyle = "black";
-			var fontHeight = Math.min(FONT_HEIGHT_MAX, Math.floor(busiHeights[r] * 0.5));
 			ctx.font = fontHeight + "px Arial";
 			var textOffset = posY + busiHeights[r] * 0.5 + fontHeight * 0.5;
 			ctx.fillText(busiList[r].name, 10, textOffset);
