@@ -80,7 +80,7 @@ function drawParallel(canvasName) {
 		ctx.stroke();
 
 		// scale bar and numbers on vertical line
-		var intervals = Status[keys[i]].eint;
+		var intervals = Status[keys[i]].qint;
 		// alert(intervals);
 		var entryHeight = (HEIGHT - MARGIN_TOP - MARGIN_BOTTOM - TEXT_HEIGHT) / (intervals.length - 1);
 		var barWidth = 5;
@@ -115,8 +115,8 @@ function drawParallel(canvasName) {
 		ctx.strokeStyle = paraLines[i].COL;
 		ctx.beginPath();
 		for (var j = 0; j < keys.length - 2; j++) {
-			// var intervals = Status[keys[j]].eint;
-			var intervals = Status[Object.keys(Status)[j]].eint;
+			// var intervals = Status[keys[j]].qint;
+			var intervals = Status[Object.keys(Status)[j]].qint;
 			var value = paraLines[i][keys[j + 2]];
 			var max = intervals[intervals.length - 1];
 			var min = intervals[0];
