@@ -97,6 +97,19 @@ function drawParallel(canvasName) {
 		ctx.fillText(intervals[0], posX + barWidth + 2, posY - FONT_HEIGHT * 0.2);
 		ctx.stroke();
 		ctx.fill();
+
+		for (var j = 0; j < intervals.length; j++) {
+			var number = intervals[j];
+			if (i == 5) {
+				number = number.toFixed(1);
+			} else {
+				number = number.toFixed(0);
+			}
+			ctx.fillText(number, posX + barWidth + 2, posY - FONT_HEIGHT * 0.2 - entryHeight * j);
+			ctx.stroke();
+			ctx.fill();
+		}
+
 		// scale number
 		ctx.font = FONT_HEIGHT * 0.8 + "px Arial";
 		var topNumber = intervals[intervals.length - 1];
@@ -140,10 +153,10 @@ function drawParallel(canvasName) {
 		// legend
 		ctx.beginPath();
 		ctx.fillStyle = paraLines[i].COL;
-		ctx.fillRect(WIDTH - 50, 150 + i * 20, 10, 10);
+		ctx.fillRect(WIDTH - 40, 150 + i * 20, 10, 10);
 		ctx.fill();
 		ctx.font = FONT_HEIGHT + "px Arial";
-		ctx.fillText(paraLines[i].NAM, WIDTH - 50 + 10 + FONT_HEIGHT * 0.2, 150 + i * 20 + FONT_HEIGHT * 0.6);
+		ctx.fillText(paraLines[i].NAM, WIDTH - 40 + 10 + FONT_HEIGHT * 0.2, 150 + i * 20 + FONT_HEIGHT * 0.6);
 		ctx.stroke();
 
 	}

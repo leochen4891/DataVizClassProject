@@ -103,18 +103,6 @@ function calcTotal(flag, start, end) {
 	return sum;
 }
 
-function calcREVtotal(start, end){
-	var REVIEW_OFFSET = 51;
-	var sum = 0;
-	for(var j = 0; j < GEOIDs.length; j++){
-		var sss = 0;
-        for (var i=start;i <= end; i++) {
-            sss += GEOIDTable[GEOIDs[j]][i + REVIEW_OFFSET];
-        }
-		sum += sss;
-	}
-	return sum;
-}
 function vCount(start, end) {
 	var c = tractData.features;
 	var vCount = 0;
@@ -167,33 +155,28 @@ function aveSumList(flag, start, end){
 	for (var i = 0; i < c.length; i++) {
 		var sum = 0;
 		for (var j = start; j <= end; j++) {
-			sum = sum + c[i].properties[flag + j] * Math.random();
+			sum = sum + c[i].properties[flag + j];// * Math.random();
 		}
 		list.push(sum);		
 	}
 	return list;
 }	
 
-function getAveList(start, end){
-	var nList = sumList('R_M', start, end);
-	//alert(nList);
-	var rList = aveSumList('S_M', start, end);
-	//console.log("rList = " + rList);
-	//alert(rList);
-	var aveList = [];
-	for (var i = 0; i < nList.length; i++){
-		if(nList[i] != 0){
-			aveList.push(rList[i]/nList[i]);
-			
+function getAveList(begin, end){
+	var list = [];
+	for (var i = 0; i < GEOIDs.length; i++ ){
+		var geo = GEOIDs[i];
+		var star = getStar(geo, begin, end);
+		var review = getReview(geo, begin, end);
+		if (review == 0){
+			list.push(0);
 		}
 		else{
-			aveList.push(0);
+			list.push(star / review);
 		}
 	}
-	//alert(aveList);
-	return aveList;
+	return list;
 }
-
 
 function getAveGrades(aveList){
 	//alert(aveList);
@@ -214,7 +197,7 @@ function getAveInfo(start, end){
 	}
 	//Status.RAT.total = sum;
 	//console.log("sum = " + sum + ", len = " + vCount(1, 1));
-	Status.RAT.ave = sum / vCount(1, 1);//sCount('R_M', start, end);//vCount(start, end);
+	Status.RAT.ave = sum / alist.length;//sCount('R_M', start, end);//vCount(start, end);
 	getAveGrades(alist);
 }
 
@@ -294,30 +277,83 @@ function updatePopInc(index, flag, start, end, count){
 	Status[index].qint = quantInt(slist);
 
 }
+
+function updateCrime(start, end){
+	var list = [];
+	var sum = 0;
+	for (var i = 0; i < GEOIDs.length; i++){
+		var geo = GEOIDs[i];
+		var crime = getCrime(geo, start, end);
+		list.push(crime);
+		sum += crime;
+	}
+	
+	var slist = list.sort(function(a, b){return a - b;});
+	Status.CRM.total = sum;
+	Status.CRM.ave = sum / list.length;
+	Status.CRM.med = median(slist);
+	Status.CRM.eint = equalInt(slist);
+	Status.CRM.qint = quantInt(slist);
+}
+
+function updateVCrime(start, end){
+	var list = [];
+	var sum = 0;
+	for (var i = 0; i < GEOIDs.length; i++){
+		var geo = GEOIDs[i];
+		var vCrime = getVioCrime(geo, start, end);
+		list.push(vCrime);
+		sum += vCrime;
+	}
+	
+	var slist = list.sort(function(a, b){return a - b;});
+	Status.VCR.total = sum;
+	Status.VCR.ave = sum / list.length;
+	Status.VCR.med = median(slist);
+	Status.VCR.eint = equalInt(slist);
+	Status.VCR.qint = quantInt(slist);
+}
+
+function updateReview(start, end){
+	var list = [];
+	var sum = 0;
+	for (var i = 0; i < GEOIDs.length; i++){
+		var geo = GEOIDs[i];
+		var review = getReview(geo, start, end);
+		list.push(review);
+		sum += review;
+	}
+	
+	var slist = list.sort(function(a, b){return a - b;});
+	Status.REV.total = sum;
+	Status.REV.ave = sum / list.length;
+	Status.REV.med = median(slist);
+	Status.REV.eint = equalInt(slist);
+	Status.REV.qint = quantInt(slist);
+}
 function getGrade(start, end) {
-	var num = vCount(start, end);
 	var len = vCount(1, 1);
-	updateOne('CRM', 'C_M', start, end, sCount('C_M', start, end));
-
-	updateOne('VCR', 'VC_M', start, end, sCount('VC_M', start, end));
-
-	updateOne('REV', 'R_M', start, end, sCount('R_M', start, end));
-
+	//updateOne('CRM', 'C_M', start, end, num);//sCount('C_M', start, end));
+	updateCrime(start, end);
+	//updateOne('VCR', 'VC_M', start, end, num);//sCount('VC_M', start, end));
+	updateVCrime(start, end);
+	//updateOne('REV', 'R_M', start, end, num);//sCount('R_M', start, end));
+	updateReview(start, end);
 	updatePopInc('POP', 'Population', start, end, len);
 	updatePopInc('INC', 'Income', start, end, len);
 	
 	getAveInfo(start, end);
 }
 
+
 function updateGrade(start, end) {
-	var num = vCount(start, end);
-	var len = vCount(1, 1);
-	updateOne('CRM', 'C_M', start, end, sCount('C_M', start, end));
-
-	updateOne('VCR', 'VC_M', start, end, sCount('VC_M', start, end));
-
-	updateOne('REV', 'R_M', start, end, sCount('R_M', start, end));
 	
+	//updateOne('CRM', 'C_M', start, end,  num );//sCount('C_M', start, end));
+	updateCrime(start, end);
+	//updateOne('VCR', 'VC_M', start, end, num);//sCount('VC_M', start, end));
+	updateVCrime(start, end);
+	//updateOne('REV', 'R_M', start, end,  num);//sCount('R_M', start, end));
+	updateReview(start, end);
 	getAveInfo(start, end);
 }
 

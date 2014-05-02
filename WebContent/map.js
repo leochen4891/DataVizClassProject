@@ -145,7 +145,8 @@ function onTileClick(e) {
 					'income: ' + layer.feature.properties.Income + '<br>' +
 					'crimes: ' + calcSum('C_M', left, right) + '<br>' + 
 					'v-crimes: ' + calcSum('VC_M', left, right) + '<br>' +
-					'reviews: ' + calcSum('R_M', left, right) + '<br>')
+					'reviews: ' + calcSum('R_M', left, right) + '<br>' +
+					'ratings: ' + getAveRating(Number(geoid), left, right).toFixed(2))
 		.openOn(map);
 	});	
 }
