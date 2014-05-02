@@ -174,26 +174,21 @@ function aveSumList(flag, start, end){
 	return list;
 }	
 
-function getAveList(start, end){
-	var nList = sumList('R_M', start, end);
-	//alert(nList);
-	var rList = aveSumList('S_M', start, end);
-	//console.log("rList = " + rList);
-	//alert(rList);
-	var aveList = [];
-	for (var i = 0; i < nList.length; i++){
-		if(nList[i] != 0){
-			aveList.push(rList[i]/nList[i]);
-			
+function getAveList(begin, end){
+	var list = [];
+	for (var i = 0; i < GEOIDs.length; i++ ){
+		var geo = GEOIDs[i];
+		var star = getStar(geo, begin, end);
+		var review = getReview(geo, begin, end);
+		if (review == 0){
+			list.push(0);
 		}
 		else{
-			aveList.push(0);
+			list.push(star / review);
 		}
 	}
-	//alert(aveList);
-	return aveList;
+	return list;
 }
-
 
 function getAveGrades(aveList){
 	//alert(aveList);
@@ -214,7 +209,7 @@ function getAveInfo(start, end){
 	}
 	//Status.RAT.total = sum;
 	//console.log("sum = " + sum + ", len = " + vCount(1, 1));
-	Status.RAT.ave = sum / vCount(1, 1);//sCount('R_M', start, end);//vCount(start, end);
+	Status.RAT.ave = sum / alist.length;//sCount('R_M', start, end);//vCount(start, end);
 	getAveGrades(alist);
 }
 
