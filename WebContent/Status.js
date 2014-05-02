@@ -103,18 +103,6 @@ function calcTotal(flag, start, end) {
 	return sum;
 }
 
-function calcREVtotal(start, end){
-	var REVIEW_OFFSET = 51;
-	var sum = 0;
-	for(var j = 0; j < GEOIDs.length; j++){
-		var sss = 0;
-        for (var i=start;i <= end; i++) {
-            sss += GEOIDTable[GEOIDs[j]][i + REVIEW_OFFSET];
-        }
-		sum += sss;
-	}
-	return sum;
-}
 function vCount(start, end) {
 	var c = tractData.features;
 	var vCount = 0;
@@ -289,30 +277,83 @@ function updatePopInc(index, flag, start, end, count){
 	Status[index].qint = quantInt(slist);
 
 }
+
+function updateCrime(start, end){
+	var list = [];
+	var sum = 0;
+	for (var i = 0; i < GEOIDs.length; i++){
+		var geo = GEOIDs[i];
+		var crime = getCrime(geo, start, end);
+		list.push(crime);
+		sum += crime;
+	}
+	
+	var slist = list.sort(function(a, b){return a - b;});
+	Status.CRM.total = sum;
+	Status.CRM.ave = sum / list.length;
+	Status.CRM.med = median(slist);
+	Status.CRM.eint = equalInt(slist);
+	Status.CRM.qint = quantInt(slist);
+}
+
+function updateVCrime(start, end){
+	var list = [];
+	var sum = 0;
+	for (var i = 0; i < GEOIDs.length; i++){
+		var geo = GEOIDs[i];
+		var vCrime = getVioCrime(geo, start, end);
+		list.push(vCrime);
+		sum += vCrime;
+	}
+	
+	var slist = list.sort(function(a, b){return a - b;});
+	Status.VCR.total = sum;
+	Status.VCR.ave = sum / list.length;
+	Status.VCR.med = median(slist);
+	Status.VCR.eint = equalInt(slist);
+	Status.VCR.qint = quantInt(slist);
+}
+
+function updateReview(start, end){
+	var list = [];
+	var sum = 0;
+	for (var i = 0; i < GEOIDs.length; i++){
+		var geo = GEOIDs[i];
+		var review = getReview(geo, start, end);
+		list.push(review);
+		sum += review;
+	}
+	
+	var slist = list.sort(function(a, b){return a - b;});
+	Status.REV.total = sum;
+	Status.REV.ave = sum / list.length;
+	Status.REV.med = median(slist);
+	Status.REV.eint = equalInt(slist);
+	Status.REV.qint = quantInt(slist);
+}
 function getGrade(start, end) {
-	var num = vCount(start, end);
 	var len = vCount(1, 1);
-	updateOne('CRM', 'C_M', start, end, sCount('C_M', start, end));
-
-	updateOne('VCR', 'VC_M', start, end, sCount('VC_M', start, end));
-
-	updateOne('REV', 'R_M', start, end, sCount('R_M', start, end));
-
+	//updateOne('CRM', 'C_M', start, end, num);//sCount('C_M', start, end));
+	updateCrime(start, end);
+	//updateOne('VCR', 'VC_M', start, end, num);//sCount('VC_M', start, end));
+	updateVCrime(start, end);
+	//updateOne('REV', 'R_M', start, end, num);//sCount('R_M', start, end));
+	updateReview(start, end);
 	updatePopInc('POP', 'Population', start, end, len);
 	updatePopInc('INC', 'Income', start, end, len);
 	
 	getAveInfo(start, end);
 }
 
+
 function updateGrade(start, end) {
-	var num = vCount(start, end);
-	var len = vCount(1, 1);
-	updateOne('CRM', 'C_M', start, end, sCount('C_M', start, end));
-
-	updateOne('VCR', 'VC_M', start, end, sCount('VC_M', start, end));
-
-	updateOne('REV', 'R_M', start, end, sCount('R_M', start, end));
 	
+	//updateOne('CRM', 'C_M', start, end,  num );//sCount('C_M', start, end));
+	updateCrime(start, end);
+	//updateOne('VCR', 'VC_M', start, end, num);//sCount('VC_M', start, end));
+	updateVCrime(start, end);
+	//updateOne('REV', 'R_M', start, end,  num);//sCount('R_M', start, end));
+	updateReview(start, end);
 	getAveInfo(start, end);
 }
 
