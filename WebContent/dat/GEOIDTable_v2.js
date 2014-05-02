@@ -60,7 +60,7 @@ function getStar(geoid, begin, end) {
 function getAveRating(geoid, begin, end){
 	var star = getStar(geoid, begin, end);
 	var review = getReview(geoid, begin, end);
-	if (star == 0)
+	if (review == 0)
 		return 0;
 	else
 		return star / review;
