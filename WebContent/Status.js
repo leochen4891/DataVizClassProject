@@ -167,7 +167,7 @@ function aveSumList(flag, start, end){
 	for (var i = 0; i < c.length; i++) {
 		var sum = 0;
 		for (var j = start; j <= end; j++) {
-			sum = sum + c[i].properties[flag + j] * Math.random();
+			sum = sum + c[i].properties[flag + j];// * Math.random();
 		}
 		list.push(sum);		
 	}
